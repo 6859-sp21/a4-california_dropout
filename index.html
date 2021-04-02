@@ -1,74 +1,43 @@
 <html>
   <head>
-    <!-- Load d3.js -->
-    <script src="https://d3js.org/d3.v6.js"></script>
-    <script src="https://unpkg.com/d3-array@1"></script>
-    <script src="https://unpkg.com/d3-collection@1"></script>
-    <script src="https://unpkg.com/d3-path@1"></script>
-    <script src="https://unpkg.com/d3-shape@1"></script>
-    <script src="https://unpkg.com/d3-sankey@0"></script>
+
+      <title>Sankey Diagram</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!--font-->
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;800&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+      <!--boostrap 'n libraries-->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+      <!--D3 library-->
+      <script src="https://d3js.org/d3.v6.min.js"></script>
+      <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js">
+      </script>
+
+      <!--styles-->
+      <link rel="stylesheet" href="css/styles.css">
+
   </head>
   <body>
     <h1>6.859: Assignment 4</h1>
     <h2>California School Dropout Rate</h2>
 
-    <div id="chart" style="width:420px;height:420px;">
-      <!-- This is where we will put our chart. -->
-    </div>
+    <div id="sankey"></div>
 
-    <script>
-      // 1. Data - plotting a couple of points along the y=x line
-      const county_ethnic = d3.json("/a4-california_dropout/SankeyData/county-ethnic.json", function(data) {console.log(data);});
-      var sankey = d3.sankey();
-	    const data = [
-        {x:2, y:5},
-        {x:3, y:8},
-        {x:4, y:3},
-        {x:5, y:1},
-        {x:6, y:6}
-      ];
+    <!--bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-      // 2. Setting up variables that describe our chart's space.
-      const height = 400;
-      const width = 400;;
-      const margin = ({top: 10, right: 10, bottom: 20, left: 20});
+    <!--personal js-->
+    <script src="./js/main.js"></script>
+    <script src="./js/sankey-vis.js"></script>
 
-      // 3. Create a SVG we will use to make our chart.
-      const svg = d3.create('svg')
-        .attr('width', width)
-        .attr('height', height);
 
-      // 4. Setting up scales. Create functions to scale pixels
-      const xScale = d3.scaleLinear()
-        .domain([0, 10])
-        .range([margin.left, width - margin.right]);
-    
-      const yScale = d3.scaleLinear()
-        .domain([0, 10])
-        .range([height - margin.bottom, margin.top]);
-      
-      // 5. Drawing our points
-      const symbol = d3.symbol();
-      svg.append('g')
-        .selectAll('path') // d3-shape functions (like d3.symbol) generate attributes for SVG <path> elements
-        .data(data) // data need to be defined first
-        .join('path') //enter
-        .attr('transform', d => `translate(${xScale(d.x)}, ${yScale(d.y)})`) //update
-        .attr('d', d => symbol()) // Notice, the output of the d3.symbol is wired up to the "d" attribute.
-		//d3 draws the circle for you as long as you call symbol() and assign it to d
-      
-      //6. Drawing our x-axis
-      svg.append('g')
-        .attr('transform', `translate(0, ${height - margin.bottom})`)
-        .call(d3.axisBottom(xScale)) //draw x axis using scale function
-
-      //7. Drawing our y-axis
-      svg.append('g')
-        .attr('transform', `translate(${margin.left}, 0)`)
-        .call(d3.axisLeft(yScale));
-
-      document.getElementById("chart").appendChild(svg.node());
-    </script>
   </body>
 
   <!-- This adapted from Arvind's observable from lecture. https://observablehq.com/d/4c93c3a516d35624 -->
