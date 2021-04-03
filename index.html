@@ -19,7 +19,7 @@
     <!--D3 library-->
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="js/d3-sankey.min.js"></script>
-    
+
     <!--styles-->
     <link rel="stylesheet" href="css/styles.css">
 
@@ -27,6 +27,28 @@
 
 <body>
 
+    <div id="selectors">
+        <form>
+            <select id="partA" class="selectors">
+                <option value="gender" selected="selected">Gender</option>
+                <option value="ethnic">Ethnicity</option>
+                <option value="grade">Grade</option>
+                <option value="county">County</option>
+            </select>
+        </form>
+        <span>To</span>
+        <form>
+            <select id="partB" class="selectors">
+                <option value="gender">Gender</option>
+                <option value="ethnic" selected="selected">Ethnicity</option>
+                <option value="grade">Grade</option>
+                <option value="county">County</option>
+            </select>
+        </form>
+        <span id="warning"></span>
+
+
+    </div>
     <div id="sankey"></div>
 
     <!--bootstrap-->
@@ -34,8 +56,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <!--personal js-->
-    
+
     <script src="./js/main.js"></script>
     <script src="./js/sankey-vis.js"></script>
+<!--    <script src="./js/sankey-update.js"></script>-->
 
 </body></html>
