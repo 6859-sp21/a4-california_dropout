@@ -1,8 +1,7 @@
 #sankey {
     width: 100vw;
-    height: 50vh;
+    height: 100vh;
 }
-
 
 .node rect {
   fill-opacity: .9;

@@ -1,295 +1,355 @@
-d3.sankey = function() {
-  var sankey = {},
-      nodeWidth = 20,
-      nodePadding = 30,
-      size = [2, 2],
-      nodes = [],
-      links = [];
+// https://github.com/d3/d3-sankey v0.12.3 Copyright 2019 Mike Bostock
+! function (n, t) {
+    "object" == typeof exports && "undefined" != typeof module ? t(exports, require("d3-array"), require("d3-shape")) : "function" == typeof define && define.amd ? define(["exports", "d3-array", "d3-shape"], t) : t((n = n || self).d3 = n.d3 || {}, n.d3, n.d3)
+}(this, function (n, t, e) {
+    "use strict";
 
-  sankey.nodeWidth = function(_) {
-    if (!arguments.length) return nodeWidth;
-    nodeWidth = +_;
-    return sankey;
-  };
-
-  sankey.nodePadding = function(_) {
-    if (!arguments.length) return nodePadding;
-    nodePadding = +_;
-    return sankey;
-  };
-
-  sankey.nodes = function(_) {
-    if (!arguments.length) return nodes;
-    nodes = _;
-    return sankey;
-  };
-
-  sankey.links = function(_) {
-    if (!arguments.length) return links;
-    links = _;
-    return sankey;
-  };
-
-  sankey.size = function(_) {
-    if (!arguments.length) return size;
-    size = _;
-    return sankey;
-  };
-
-  sankey.layout = function(iterations) {
-    computeNodeLinks();
-    computeNodeValues();
-    computeNodeBreadths();
-    computeNodeDepths(iterations);
-    computeLinkDepths();
-    return sankey;
-  };
-
-  sankey.relayout = function() {
-    computeLinkDepths();
-    return sankey;
-  };
-
-  sankey.link = function() {
-    var curvature = .5;
-
-    function link(d) {
-      var x0 = d.source.x + d.source.dx,
-          x1 = d.target.x,
-          xi = d3.interpolateNumber(x0, x1),
-          x2 = xi(curvature),
-          x3 = xi(1 - curvature),
-          y0 = d.source.y + d.sy + d.dy / 2,
-          y1 = d.target.y + d.ty + d.dy / 2;
-        
-      return "M" + x0 + "," + y0
-           + "C" + x2 + "," + y0
-           + " " + x3 + "," + y1
-           + " " + x1 + "," + y1;
+    function o(n) {
+        return n.target.depth
     }
 
-    link.curvature = function(_) {
-      if (!arguments.length) return curvature;
-      curvature = +_;
-      return link;
-    };
-
-    return link;
-  };
-
-  // Populate the sourceLinks and targetLinks for each node.
-  // Also, if the source and target are not objects, assume they are indices.
-  function computeNodeLinks() {
-    nodes.forEach(function(node) {
-      node.sourceLinks = [];
-      node.targetLinks = [];
-    });
-    links.forEach(function(link) {
-      var source = link.source,
-          target = link.target;
-      if (typeof source === "number") source = link.source = nodes[link.source];
-      if (typeof target === "number") target = link.target = nodes[link.target];
-      source.sourceLinks.push(link);
-      target.targetLinks.push(link);
-    });
-  }
-
-  // Compute the value (size) of each node by summing the associated links.
-  function computeNodeValues() {
-    nodes.forEach(function(node) {
-      node.value = Math.max(
-        d3.sum(node.sourceLinks, value),
-        d3.sum(node.targetLinks, value)
-      );
-    });
-  }
-
-  // Iteratively assign the breadth (x-position) for each node.
-  // Nodes are assigned the maximum breadth of incoming neighbors plus one;
-  // nodes with no incoming links are assigned breadth zero, while
-  // nodes with no outgoing links are assigned the maximum breadth.
-  function computeNodeBreadths() {
-    var remainingNodes = nodes,
-        nextNodes,
-        x = 0;
-
-    while (remainingNodes.length) {
-      nextNodes = [];
-      remainingNodes.forEach(function(node) {
-        node.x = x;
-        node.dx = nodeWidth;
-        node.sourceLinks.forEach(function(link) {
-          if (nextNodes.indexOf(link.target) < 0) {
-            nextNodes.push(link.target);
-          }
-        });
-      });
-      remainingNodes = nextNodes;
-      ++x;
+    function r(n, t) {
+        return n.sourceLinks.length ? n.depth : t - 1
     }
 
-    //
-    moveSinksRight(x);
-    scaleNodeBreadths((size[0] - nodeWidth) / (x - 1));
-  }
-
-  function moveSourcesRight() {
-    nodes.forEach(function(node) {
-      if (!node.targetLinks.length) {
-        node.x = d3.min(node.sourceLinks, function(d) { return d.target.x; }) - 1;
-      }
-    });
-  }
-
-  function moveSinksRight(x) {
-    nodes.forEach(function(node) {
-      if (!node.sourceLinks.length) {
-        node.x = x - 1;
-      }
-    });
-  }
-
-  function scaleNodeBreadths(kx) {
-    nodes.forEach(function(node) {
-      node.x *= kx;
-    });
-  }
-
-  function computeNodeDepths(iterations) {
-    var nodesByBreadth = d3.nest()
-        .key(function(d) { return d.x; })
-        .sortKeys(d3.ascending)
-        .entries(nodes)
-        .map(function(d) { return d.values; });
-
-    //
-    initializeNodeDepth();
-    resolveCollisions();
-    for (var alpha = 1; iterations > 0; --iterations) {
-      relaxRightToLeft(alpha *= .99);
-      resolveCollisions();
-      relaxLeftToRight(alpha);
-      resolveCollisions();
+    function i(n) {
+        return function () {
+            return n
+        }
     }
 
-    function initializeNodeDepth() {
-      var ky = d3.min(nodesByBreadth, function(nodes) {
-        return (size[1] - (nodes.length - 1) * nodePadding) / d3.sum(nodes, value);
-      });
-
-      nodesByBreadth.forEach(function(nodes) {
-        nodes.forEach(function(node, i) {
-          node.y = i;
-          node.dy = node.value * ky;
-        });
-      });
-
-      links.forEach(function(link) {
-        link.dy = link.value * ky;
-      });
+    function s(n, t) {
+        return u(n.source, t.source) || n.index - t.index
     }
 
-    function relaxLeftToRight(alpha) {
-      nodesByBreadth.forEach(function(nodes, breadth) {
-        nodes.forEach(function(node) {
-          if (node.targetLinks.length) {
-            var y = d3.sum(node.targetLinks, weightedSource) / d3.sum(node.targetLinks, value);
-            node.y += (y - center(node)) * alpha;
-          }
-        });
-      });
-
-      function weightedSource(link) {
-        return center(link.source) * link.value;
-      }
+    function f(n, t) {
+        return u(n.target, t.target) || n.index - t.index
     }
 
-    function relaxRightToLeft(alpha) {
-      nodesByBreadth.slice().reverse().forEach(function(nodes) {
-        nodes.forEach(function(node) {
-          if (node.sourceLinks.length) {
-            var y = d3.sum(node.sourceLinks, weightedTarget) / d3.sum(node.sourceLinks, value);
-            node.y += (y - center(node)) * alpha;
-          }
-        });
-      });
-
-      function weightedTarget(link) {
-        return center(link.target) * link.value;
-      }
+    function u(n, t) {
+        return n.y0 - t.y0
     }
 
-    function resolveCollisions() {
-      nodesByBreadth.forEach(function(nodes) {
-        var node,
-            dy,
-            y0 = 0,
-            n = nodes.length,
-            i;
+    function c(n) {
+        return n.value
+    }
 
-        // Push any overlapping nodes down.
-        nodes.sort(ascendingDepth);
-        for (i = 0; i < n; ++i) {
-          node = nodes[i];
-          dy = y0 - node.y;
-          if (dy > 0) node.y += dy;
-          y0 = node.y + node.dy + nodePadding;
+    function l(n) {
+        return n.index
+    }
+
+    function a(n) {
+        return n.nodes
+    }
+
+    function d(n) {
+        return n.links
+    }
+
+    function h(n, t) {
+        const e = n.get(t);
+        if (!e) throw new Error("missing: " + t);
+        return e
+    }
+
+    function g({
+        nodes: n
+    }) {
+        for (const t of n) {
+            let n = t.y0,
+                e = n;
+            for (const e of t.sourceLinks) e.y0 = n + e.width / 2, n += e.width;
+            for (const n of t.targetLinks) n.y1 = e + n.width / 2, e += n.width
+        }
+    }
+
+    function y(n) {
+        return [n.source.x1, n.y0]
+    }
+
+    function k(n) {
+        return [n.target.x0, n.y1]
+    }
+    n.sankey = function () {
+        let n, e, o, y = 0,
+            k = 0,
+            L = 1,
+            p = 1,
+            w = 24,
+            x = 8,
+            m = l,
+            v = r,
+            M = a,
+            b = d,
+            S = 6;
+
+        function z() {
+            const r = {
+                nodes: M.apply(null, arguments),
+                links: b.apply(null, arguments)
+            };
+            return function ({
+                    nodes: n,
+                    links: t
+                }) {
+                    for (const [t, e] of n.entries()) e.index = t, e.sourceLinks = [], e.targetLinks = [];
+                    const e = new Map(n.map((t, e) => [m(t, e, n), t]));
+                    for (const [n, o] of t.entries()) {
+                        o.index = n;
+                        let {
+                            source: t,
+                            target: r
+                        } = o;
+                        "object" != typeof t && (t = o.source = h(e, t)), "object" != typeof r && (r = o.target = h(e, r)), t.sourceLinks.push(o), r.targetLinks.push(o)
+                    }
+                    if (null != o)
+                        for (const {
+                                sourceLinks: t,
+                                targetLinks: e
+                            } of n) t.sort(o), e.sort(o)
+                }(r),
+                function ({
+                    nodes: n
+                }) {
+                    for (const e of n) e.value = void 0 === e.fixedValue ? Math.max(t.sum(e.sourceLinks, c), t.sum(e.targetLinks, c)) : e.fixedValue
+                }(r),
+                function ({
+                    nodes: n
+                }) {
+                    const t = n.length;
+                    let e = new Set(n),
+                        o = new Set,
+                        r = 0;
+                    for (; e.size;) {
+                        for (const n of e) {
+                            n.depth = r;
+                            for (const {
+                                    target: t
+                                } of n.sourceLinks) o.add(t)
+                        }
+                        if (++r > t) throw new Error("circular link");
+                        e = o, o = new Set
+                    }
+                }(r),
+                function ({
+                    nodes: n
+                }) {
+                    const t = n.length;
+                    let e = new Set(n),
+                        o = new Set,
+                        r = 0;
+                    for (; e.size;) {
+                        for (const n of e) {
+                            n.height = r;
+                            for (const {
+                                    source: t
+                                } of n.targetLinks) o.add(t)
+                        }
+                        if (++r > t) throw new Error("circular link");
+                        e = o, o = new Set
+                    }
+                }(r),
+                function (o) {
+                    const r = function ({
+                        nodes: n
+                    }) {
+                        const o = t.max(n, n => n.depth) + 1,
+                            r = (L - y - w) / (o - 1),
+                            i = new Array(o);
+                        for (const t of n) {
+                            const n = Math.max(0, Math.min(o - 1, Math.floor(v.call(null, t, o))));
+                            t.layer = n, t.x0 = y + n * r, t.x1 = t.x0 + w, i[n] ? i[n].push(t) : i[n] = [t]
+                        }
+                        if (e)
+                            for (const n of i) n.sort(e);
+                        return i
+                    }(o);
+                    n = Math.min(x, (p - k) / (t.max(r, n => n.length) - 1)),
+                        function (e) {
+                            const o = t.min(e, e => (p - k - (e.length - 1) * n) / t.sum(e, c));
+                            for (const t of e) {
+                                let e = k;
+                                for (const r of t) {
+                                    r.y0 = e, r.y1 = e + r.value * o, e = r.y1 + n;
+                                    for (const n of r.sourceLinks) n.width = n.value * o
+                                }
+                                e = (p - e + n) / (t.length + 1);
+                                for (let n = 0; n < t.length; ++n) {
+                                    const o = t[n];
+                                    o.y0 += e * (n + 1), o.y1 += e * (n + 1)
+                                }
+                                V(t)
+                            }
+                        }(r);
+                    for (let n = 0; n < S; ++n) {
+                        const t = Math.pow(.99, n),
+                            e = Math.max(1 - t, (n + 1) / S);
+                        E(r, t, e), j(r, t, e)
+                    }
+                }(r), g(r), r
         }
 
-        // If the bottommost node goes outside the bounds, push it back up.
-        dy = y0 - nodePadding - size[1];
-        if (dy > 0) {
-          y0 = node.y -= dy;
-
-          // Push any overlapping nodes back up.
-          for (i = n - 2; i >= 0; --i) {
-            node = nodes[i];
-            dy = node.y + node.dy + nodePadding - y0;
-            if (dy > 0) node.y -= dy;
-            y0 = node.y;
-          }
+        function j(n, t, o) {
+            for (let r = 1, i = n.length; r < i; ++r) {
+                const i = n[r];
+                for (const n of i) {
+                    let e = 0,
+                        o = 0;
+                    for (const {
+                            source: t,
+                            value: r
+                        } of n.targetLinks) {
+                        let i = r * (n.layer - t.layer);
+                        e += _(t, n) * i, o += i
+                    }
+                    if (!(o > 0)) continue;
+                    let r = (e / o - n.y0) * t;
+                    n.y0 += r, n.y1 += r, P(n)
+                }
+                void 0 === e && i.sort(u), q(i, o)
+            }
         }
-      });
-    }
 
-    function ascendingDepth(a, b) {
-      return a.y - b.y;
-    }
-  }
+        function E(n, t, o) {
+            for (let r = n.length - 2; r >= 0; --r) {
+                const i = n[r];
+                for (const n of i) {
+                    let e = 0,
+                        o = 0;
+                    for (const {
+                            target: t,
+                            value: r
+                        } of n.sourceLinks) {
+                        let i = r * (t.layer - n.layer);
+                        e += C(n, t) * i, o += i
+                    }
+                    if (!(o > 0)) continue;
+                    let r = (e / o - n.y0) * t;
+                    n.y0 += r, n.y1 += r, P(n)
+                }
+                void 0 === e && i.sort(u), q(i, o)
+            }
+        }
 
-  function computeLinkDepths() {
-    nodes.forEach(function(node) {
-      node.sourceLinks.sort(ascendingTargetDepth);
-      node.targetLinks.sort(ascendingSourceDepth);
-    });
-    nodes.forEach(function(node) {
-      var sy = 0, ty = 0;
-      node.sourceLinks.forEach(function(link) {
-        link.sy = sy;
-        sy += link.dy;
-      });
-      node.targetLinks.forEach(function(link) {
-        link.ty = ty;
-        ty += link.dy;
-      });
-    });
+        function q(t, e) {
+            const o = t.length >> 1,
+                r = t[o];
+            H(t, r.y0 - n, o - 1, e), A(t, r.y1 + n, o + 1, e), H(t, p, t.length - 1, e), A(t, k, 0, e)
+        }
 
-    function ascendingSourceDepth(a, b) {
-      return a.source.y - b.source.y;
-    }
+        function A(t, e, o, r) {
+            for (; o < t.length; ++o) {
+                const i = t[o],
+                    s = (e - i.y0) * r;
+                s > 1e-6 && (i.y0 += s, i.y1 += s), e = i.y1 + n
+            }
+        }
 
-    function ascendingTargetDepth(a, b) {
-      return a.target.y - b.target.y;
-    }
-  }
+        function H(t, e, o, r) {
+            for (; o >= 0; --o) {
+                const i = t[o],
+                    s = (i.y1 - e) * r;
+                s > 1e-6 && (i.y0 -= s, i.y1 -= s), e = i.y0 - n
+            }
+        }
 
-  function center(node) {
-    return node.y + node.dy / 2;
-  }
+        function P({
+            sourceLinks: n,
+            targetLinks: t
+        }) {
+            if (void 0 === o) {
+                for (const {
+                        source: {
+                            sourceLinks: n
+                        }
+                    } of t) n.sort(f);
+                for (const {
+                        target: {
+                            targetLinks: t
+                        }
+                    } of n) t.sort(s)
+            }
+        }
 
-  function value(link) {
-    return link.value;
-  }
+        function V(n) {
+            if (void 0 === o)
+                for (const {
+                        sourceLinks: t,
+                        targetLinks: e
+                    } of n) t.sort(f), e.sort(s)
+        }
 
-  return sankey;
-};
+        function _(t, e) {
+            let o = t.y0 - (t.sourceLinks.length - 1) * n / 2;
+            for (const {
+                    target: r,
+                    width: i
+                } of t.sourceLinks) {
+                if (r === e) break;
+                o += i + n
+            }
+            for (const {
+                    source: n,
+                    width: r
+                } of e.targetLinks) {
+                if (n === t) break;
+                o -= r
+            }
+            return o
+        }
+
+        function C(t, e) {
+            let o = e.y0 - (e.targetLinks.length - 1) * n / 2;
+            for (const {
+                    source: r,
+                    width: i
+                } of e.targetLinks) {
+                if (r === t) break;
+                o += i + n
+            }
+            for (const {
+                    target: n,
+                    width: r
+                } of t.sourceLinks) {
+                if (n === e) break;
+                o -= r
+            }
+            return o
+        }
+        return z.update = function (n) {
+            return g(n), n
+        }, z.nodeId = function (n) {
+            return arguments.length ? (m = "function" == typeof n ? n : i(n), z) : m
+        }, z.nodeAlign = function (n) {
+            return arguments.length ? (v = "function" == typeof n ? n : i(n), z) : v
+        }, z.nodeSort = function (n) {
+            return arguments.length ? (e = n, z) : e
+        }, z.nodeWidth = function (n) {
+            return arguments.length ? (w = +n, z) : w
+        }, z.nodePadding = function (t) {
+            return arguments.length ? (x = n = +t, z) : x
+        }, z.nodes = function (n) {
+            return arguments.length ? (M = "function" == typeof n ? n : i(n), z) : M
+        }, z.links = function (n) {
+            return arguments.length ? (b = "function" == typeof n ? n : i(n), z) : b
+        }, z.linkSort = function (n) {
+            return arguments.length ? (o = n, z) : o
+        }, z.size = function (n) {
+            return arguments.length ? (y = k = 0, L = +n[0], p = +n[1], z) : [L - y, p - k]
+        }, z.extent = function (n) {
+            return arguments.length ? (y = +n[0][0], L = +n[1][0], k = +n[0][1], p = +n[1][1], z) : [[y, k], [L, p]]
+        }, z.iterations = function (n) {
+            return arguments.length ? (S = +n, z) : S
+        }, z
+    }, n.sankeyCenter = function (n) {
+        return n.targetLinks.length ? n.depth : n.sourceLinks.length ? t.min(n.sourceLinks, o) - 1 : 0
+    }, n.sankeyJustify = r, n.sankeyLeft = function (n) {
+        return n.depth
+    }, n.sankeyLinkHorizontal = function () {
+        return e.linkHorizontal().source(y).target(k)
+    }, n.sankeyRight = function (n, t) {
+        return t - 1 - n.height
+    }, Object.defineProperty(n, "__esModule", {
+        value: !0
+    })
+});
