@@ -1,0 +1,188 @@
+{
+    "Alameda": {
+        "White": 12,
+        "African American": 953,
+        "Hispanic": 52
+    },
+    "Butte": {
+        "White": 22
+    },
+    "Calaveras": {},
+    "Contra Costa": {
+        "African American": 216,
+        "White": 164,
+        "Hispanic": 74
+    },
+    "El Dorado": {
+        "White": 24
+    },
+    "Fresno": {
+        "African American": 285,
+        "Hispanic": 3199,
+        "White": 682,
+        "Asian American": 66,
+        "Multiple": 23
+    },
+    "NA": {
+        "Hispanic": 611,
+        "African American": 220,
+        "White": 1107,
+        "Other": 185,
+        "Multiple": 60,
+        "Asian American": 13
+    },
+    "Glenn": {},
+    "Imperial": {
+        "Hispanic": 153,
+        "White": 6
+    },
+    "Inyo": {},
+    "Kern": {
+        "Hispanic": 3629,
+        "White": 1514,
+        "African American": 422
+    },
+    "Kings": {
+        "Hispanic": 68,
+        "White": 63
+    },
+    "Lassen": {
+        "White": 12,
+        "Multiple": 29,
+        "Hispanic": 40
+    },
+    "Los Angeles": {
+        "Hispanic": 27782,
+        "African American": 5770,
+        "White": 4161,
+        "Multiple": 146,
+        "Filipino": 56,
+        "Other": 300,
+        "Asian American": 44
+    },
+    "Madera": {
+        "White": 95,
+        "Hispanic": 337
+    },
+    "Mendocino": {},
+    "Merced": {
+        "White": 171,
+        "Hispanic": 687
+    },
+    "Monterey": {
+        "Hispanic": 360,
+        "Other": 15
+    },
+    "Napa": {
+        "Hispanic": 14
+    },
+    "Nevada": {},
+    "Orange": {
+        "White": 5092,
+        "Hispanic": 15163,
+        "African American": 279,
+        "Multiple": 226,
+        "Asian American": 39,
+        "Other": 107
+    },
+    "Placer": {
+        "White": 1095,
+        "Hispanic": 130,
+        "Multiple": 13
+    },
+    "Riverside": {
+        "White": 1151,
+        "Hispanic": 3673,
+        "African American": 330
+    },
+    "Sacramento": {
+        "Hispanic": 1193,
+        "African American": 523,
+        "White": 3586,
+        "Asian American": 59,
+        "Multiple": 45,
+        "No Record": 33,
+        "Other": 19
+    },
+    "San Bernardino": {
+        "African American": 716,
+        "Other": 125,
+        "Hispanic": 7586,
+        "White": 3550,
+        "Multiple": 238
+    },
+    "San Diego": {
+        "Hispanic": 5838,
+        "African American": 510,
+        "White": 2123,
+        "Multiple": 22,
+        "Other": 16
+    },
+    "San Francisco": {
+        "Hispanic": 365,
+        "White": 225,
+        "African American": 709
+    },
+    "San Joaquin": {
+        "White": 496,
+        "African American": 615,
+        "Hispanic": 1057,
+        "Multiple": 28
+    },
+    "San Mateo": {
+        "Hispanic": 131,
+        "White": 136,
+        "African American": 31
+    },
+    "Santa Barbara": {
+        "Hispanic": 53
+    },
+    "Santa Clara": {
+        "Multiple": 24,
+        "Hispanic": 382,
+        "White": 25
+    },
+    "Santa Cruz": {
+        "White": 245,
+        "Hispanic": 508
+    },
+    "Shasta": {
+        "White": 58
+    },
+    "Siskiyou": {
+        "White": 152
+    },
+    "Solano": {
+        "African American": 206,
+        "Hispanic": 141,
+        "White": 70
+    },
+    "Sonoma": {
+        "White": 334,
+        "Hispanic": 130,
+        "African American": 22
+    },
+    "Stanislaus": {
+        "Hispanic": 953,
+        "African American": 27,
+        "White": 306,
+        "Other": 18
+    },
+    "Sutter": {
+        "White": 137
+    },
+    "Tulare": {
+        "Hispanic": 72,
+        "White": 12
+    },
+    "Ventura": {
+        "Hispanic": 72,
+        "White": 82,
+        "Other": 28
+    },
+    "Yolo": {},
+    "Yuba": {
+        "Hispanic": 40,
+        "White": 251
+    }
+}

@@ -1,0 +1,56 @@
+{
+    "nodes": [
+        {
+            "node": 0,
+            "name": "F"
+        },
+        {
+            "node": 1,
+            "name": "M"
+        },
+        {
+            "node": 2,
+            "name": "D7"
+        },
+        {
+            "node": 3,
+            "name": "D8"
+        },
+        {
+            "node": 4,
+            "name": "D9"
+        }
+],
+    "links": [
+        {
+            "source": 0,
+            "target": 2,
+            "value": 1627
+        },
+        {
+            "source": 0,
+            "target": 3,
+            "value": 2184
+        },
+        {
+            "source": 0,
+            "target": 4,
+            "value": 8785
+        },
+        {
+            "source": 1,
+            "target": 2,
+            "value": 2487
+        },
+        {
+            "source": 1,
+            "target": 3,
+            "value": 3832
+        },
+        {
+            "source": 1,
+            "target": 4,
+            "value": 14457
+        }
+]
+}
