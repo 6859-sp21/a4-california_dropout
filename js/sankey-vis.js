@@ -28,7 +28,7 @@ let first = "gender",
 
 // load the data
 
-d3.json("../sankeydata/" + first + "-" + second + ".json").then(function (data) {
+d3.json("sankeydata/" + first + "-" + second + ".json").then(function (data) {
 
     console.log(data);
 
