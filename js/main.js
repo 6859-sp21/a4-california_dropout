@@ -1,7 +1,10 @@
 $(".selectors").change(function () {
     let partA = $('#partA').val(),
         partB = $('#partB').val(),
-        year = "All";
+        var output = document.getElementById("selectyear");
+        var slider = document.getElementById("myRange");
+        year = slider.value;
+        // year = "All";
 
     if (partA !== partB) {
         updatesankey(partA, partB, year);

@@ -216,4 +216,4 @@ function updatesankey(first, second, year) {
 
 };
 
-updatesankey("gender", "ethnic", "All");
+updatesankey("gender", "ethnic", "2000");

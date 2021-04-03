@@ -6,6 +6,14 @@
     bottom: 10vh;
 }
 
+#yearfilter {
+    position: fixed;
+    left: 10vh;
+    right: 10vh;
+    top: 20vh;
+    bottom: 10vh;
+}
+
 #selectors {
     position: fixed;
     left: calc(10vh + 20px);
