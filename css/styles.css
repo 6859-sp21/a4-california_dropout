@@ -8,7 +8,7 @@
 
 #yearfilter {
     position: fixed;
-    left: 10vh;
+    left: calc(10vh + 20px);
     right: 10vh;
     top: 20vh;
     bottom: 10vh;

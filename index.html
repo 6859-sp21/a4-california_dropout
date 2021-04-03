@@ -27,9 +27,10 @@
 
 <body>
  
-    <div class="slidecontainer" id="yearfilter">
-        <input type="range" min="1991" max="2007" value="2000" class="slider" id="myRange">
-        <span>Value: <span id="selectyear"></span>
+    <div id="yearfilter">
+        <button id="allyear" value="false" onclick="allyear();">Show All Year Instead</button>
+        <input type="range" min="1991" max="2007" value="1993" class="selectors slider" id="yearRange">
+        <span>Year: <span id="selectedyear">1993</span></span>
     </div>
 
     <div id="selectors">
@@ -65,15 +66,7 @@
 
     <script src="./js/main.js"></script>
     <script src="./js/sankey-vis.js"></script>
-    <script>
-        var slider = document.getElementById("myRange");
-        var output = document.getElementById("selectyear");
-        output.innerHTML = slider.value;
-
-        slider.oninput = function() {
-            output.innerHTML = this.value;
-        }
-    </script>
+    
 <!--    <script src="./js/sankey-update.js"></script>-->
 
 </body></html>
