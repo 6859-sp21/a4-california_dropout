@@ -8,7 +8,7 @@ const data = [
     { name: 'Michael', score: 86 },
   ];
   
-  d3.csv("/sankeydata/bar-test.csv").then((datatest)=>{
+  d3.csv("/a4-california_dropout/sankeydata/bar-test.csv").then((datatest)=>{
 
     const year = document.getElementById("yearRange").value;
     var data = datatest.filter(d => d.begin_year === year);
