@@ -6,6 +6,15 @@
     bottom: 10vh;
 }
 
+#bar {
+    position: fixed;
+    left: 50vh;
+    right: 30vh;
+    top: 30vh;
+    bottom: 10vh;
+    display: block;
+}
+
 #yearfilter {
     position: fixed;
     left: calc(10vh + 20px);
