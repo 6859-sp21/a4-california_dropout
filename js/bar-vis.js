@@ -1,69 +1,101 @@
-const data = [
-    { name: 'John', score: 80 },
-    { name: 'Simon', score: 76 },
-    { name: 'Samantha', score: 90 },
-    { name: 'Patrick', score: 82 },
-    { name: 'Mary', score: 90 },
-    { name: 'Christina', score: 75 },
-    { name: 'Michael', score: 86 },
-  ];
-  
-  d3.csv("/a4-california_dropout/sankeydata/bar-test.csv").then((datatest)=>{
+var svg = d3.select("svg"),
+    margin = 200,
+    width = svg.attr("width") - margin,
+    height = svg.attr("height") - margin;
 
-    const year = document.getElementById("yearRange").value;
-    var data = datatest.filter(d => d.begin_year === year);
+var g = svg.append("g")
+        .attr("transform", "translate(" + 100 + "," + 100 + ")");
 
-    var width = document.getElementById("bar").offsetWidth;
-    var height = document.getElementById("bar").offsetHeight;
-    var margin = { top: 50, bottom: 50, left: 50, right: 50 };
-    
-    const svg = d3.select('#bar')
-        .append('svg')
-        .attr('width', width - margin.left - margin.right)
-        .attr('height', height - margin.top - margin.bottom)
-        .attr("viewBox", [0, 0, width, height]);
-    
-    const x = d3.scaleBand()
-        .domain(d3.range(data.length))
-        .range([margin.left, width - margin.right])
-        .padding(0.1)
-    
-    const y = d3.scaleLinear()
-        .domain([0, d3.max(datatest, d => d.dropout)])
-        .range([height - margin.bottom, margin.top])
-    
-    const colorScale = d3.scaleOrdinal()
-        .domain(data.map(d => d.grade))
-        .range(d3.schemeTableau10);
+    svg.append("text")
+        .attr("transform", "translate(100,0)")
+        .attr("x", 50)
+        .attr("y", 50)
+        .attr("font-size", "24px")
+        .text("Number of Dropouts in California from 1991-2016")
 
-    svg
-        .append("g")
-        .selectAll("rect")
+d3.csv("/sankeydata/bar-test.csv").then((original_data)=>{
+
+    // sum the dropout numbers and save to data
+    var aggregated_data = {};
+    original_data.forEach(function(d) {
+    if (aggregated_data.hasOwnProperty(d.begin_year)) {
+        // console.log(d.dropout)
+        aggregated_data[d.begin_year] = aggregated_data[d.begin_year] + parseInt(d.dropout);
+    } else {
+        aggregated_data[d.begin_year] = parseInt(d.dropout);
+    }
+    });
+    console.log(aggregated_data)
+
+    var data = [];
+    for (var prop in aggregated_data) {
+        data.push({ begin_year: prop, dropout: aggregated_data[prop] });
+    }
+    console.log(data)
+    // const year = document.getElementById("yearRange").value;
+    // var csvdata = data.filter(d => d.begin_year === year);
+    // console.log(data)
+
+    var xScale = d3.scaleBand()
+                    .domain(data.map(d => d.begin_year))
+                    .range ([0, width]).padding(0.4),
+        yScale = d3.scaleLinear()
+                    .domain([0, d3.max(data, function(d) { return d.dropout; })])
+                    .range ([height, 0]);
+
+    // xScale.domain(data.map(function(d) { return d.begin_year; }));
+    // yScale.domain([0, d3.max(data, function(d) { return d.dropout; })]);
+
+    // x-axis
+    g.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(xScale))
+        .append("text")
+        .attr("y", height - 250)
+        .attr("x", width - 100)
+        .attr("text-anchor", "end")
+        .attr("stroke", "black")
+        .text("Year");
+
+    // g.append("g")
+    //     .attr("transform", "translate(0," + height + ")")
+    //     .call(d3.axisBottom(xScale));
+
+    g.append("g")
+        .call(d3.axisLeft(yScale)
+        .tickFormat(function(d){
+            return d;
+        }).ticks(10))
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", "-5.1em")
+        .attr("text-anchor", "middle")
+        .attr("stroke", "black")
+        .text("Number of Dropouts");
+    
+    g.selectAll(".bar")
         .data(data)
-        .join("rect")
-        .attr("x", (d, i) => x(i))
-        .attr("y", d => y(d.dropout))
-        .attr('title', (d) => d.dropout)
-        .attr("class", "rect")
-        .attr("height", d => y(0) - y(d.dropout))
-        .attr("width", x.bandwidth())
-        .attr("fill",  d => colorScale(d.grade));
+        .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", function(d) { return xScale(d.begin_year); })
+        .attr("y", function(d) { return yScale(d.dropout); })
+        .attr("width", xScale.bandwidth())
+        .attr("height", function(d) { return height - yScale(d.dropout); })
     
-    function yAxis(g) {
-        g.attr("transform", `translate(${margin.left}, 0)`)
-        .call(d3.axisLeft(y).ticks(null, data.format))
-        .attr("font-size", '20px')
-    }
-    
-    function xAxis(g) {
-        g.attr("transform", `translate(0,${height - margin.bottom})`)
-        .call(d3.axisBottom(x).tickFormat(i => data[i].grade))
-        .attr("font-size", '20px')
-    }
-    
-    svg.append("g").call(xAxis);
-    svg.append("g").call(yAxis);
-    svg.node();
+    g.selectAll('#bar.text')
+        .data(data)
+        .join('text')
+          .attr('x', d => xScale(d.begin_year))
+          .attr('y', d => yScale(d.dropout))   
+          .attr('dx', xScale.bandwidth() / 2)
+          .attr('dy', '1em')
+          .attr('fill', 'white')
+          .style('font-size', 10)
+          .style('text-anchor', 'middle')
+          .text(d => d.dropout)
 
-  document.getElementById("bar").appendChild(svg.node());
-});
+    
+    document.getElementById("bar").appendChild(svg.node());
+}
+);

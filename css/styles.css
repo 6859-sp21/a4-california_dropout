@@ -7,6 +7,7 @@
 }
 
 #bar {
+    fill: steelblue;
     position: fixed;
     left: 50vh;
     right: 30vh;
