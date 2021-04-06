@@ -17,13 +17,14 @@ function barbar() {
             .attr("height", heightbar)
             .append("g")
             // .attr("transform", "translate(" + margin / 2 + ", " + margin / 2 + ")")
-            .attr("transform", "translate(" + 50 + "," + 50 + ")");
+            .attr("transform", "translate(" + 100 + "," + -50 + ")");
 
         g.append("text")
             .attr("transform", "translate(100,0)")
-            .attr("x", 50)
-            .attr("y", 50)
-            .attr("font-size", "24px")
+            .attr("x", 0)
+            .attr("y", 70)
+            .attr("font-size", "15px")
+            .attr("stroke", "black")
             .text("Number of Dropouts in California from 1991-2016")
 
     d3.csv("sankeydata/bar-test.csv").then((original_data)=>{
@@ -64,8 +65,9 @@ function barbar() {
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(xScale))
             .append("text")
-            .attr("y", heightbar - 550)
-            .attr("x", widthbar - 100)
+            .attr("y", heightbar - 480)
+            .attr("x", widthbar - 400)
+            .attr("font-size", "10px")
             .attr("text-anchor", "end")
             .attr("stroke", "black")
             .text("Year");
@@ -81,8 +83,9 @@ function barbar() {
             }).ticks(10))
             .append("text")
             .attr("transform", "rotate(-90)")
-            .attr("y", 6)
-            .attr("dy", "-5.1em")
+            .attr("x", -280)
+            .attr("y", -45)
+            .attr("font-size", "10px")
             .attr("text-anchor", "middle")
             .attr("stroke", "black")
             .text("Number of Dropouts");
@@ -96,17 +99,17 @@ function barbar() {
             .attr("width", xScale.bandwidth()/2)
             .attr("height", function(d) { return heightbar - yScale(d.dropout); })
         
-        g.selectAll('#bar.text')
-            .data(data)
-            .join('text')
-            .attr('x', d => xScale(d.begin_year))
-            .attr('y', d => yScale(d.dropout))   
-            .attr('dx', xScale.bandwidth() / 2)
-            .attr('dy', '1em')
-            .attr('fill', 'white')
-            .style('font-size', 10)
-            .style('text-anchor', 'middle')
-            .text(d => d.dropout)
+        // g.selectAll('#bar.text')
+        //     .data(data)
+        //     .join('text')
+        //     .attr('x', d => xScale(d.begin_year))
+        //     .attr('y', d => yScale(d.dropout))   
+        //     .attr('dx', xScale.bandwidth() / 2)
+        //     .attr('dy', '1em')
+        //     .attr('fill', 'white')
+        //     .style('font-size', 10)
+        //     .style('text-anchor', 'middle')
+        //     .text(d => d.dropout)
         
         // document.getElementById("bar").appendChild(g.node());
     });
