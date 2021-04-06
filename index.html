@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>Sankey Diagram</title>
+    <title>California Dropout</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -32,33 +32,55 @@
 </head>
 
 <body>
- 
-    <div id="yearfilter">
-        <button id="allyear" value="false" onclick="allyear();">Show All Year Instead</button>
-        <input type="range" min="1991" max="2016" value="1993" class="selectors slider" id="yearRange">
-        <span>Year: <span id="selectedyear">1993</span></span>
-    </div>
+    <section id="title">
+        <h1>CALIFORNIA PUBLIC SCHOOL DROPOUT</h1>
+        <h5>What are the key drivers of Public School Dropout in California?</h3>
+    </section>
 
-    <div id="selectors">
-        <form>
-            <select id="partA" class="selectors">
-                <option value="gender" selected="selected">Gender</option>
-                <option value="ethnic">Ethnicity</option>
-                <option value="grade">Grade</option>
-                <option value="county">County</option>
-            </select>
-        </form>
-        <span>To</span>
-        <form>
-            <select id="partB" class="selectors">
-                <option value="gender">Gender</option>
-                <option value="ethnic" selected="selected">Ethnicity</option>
-                <option value="grade">Grade</option>
-                <option value="county">County</option>
-            </select>
-        </form>
-        <span id="warning"></span>
-    </div>
+    <div class="container">
+        <div class="row">
+          <div class="col-4 background">
+            <h4>Background Info</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis suscipit maiores eos cupiditate. Ex fugit necessitatibus optio corporis cum similique accusamus unde deserunt quaerat commodi? Laboriosam deserunt saepe obcaecati dolorem.</p>
+            <img src="img/Geographic.png" alt="" style="width: 100%">
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet blanditiis illum sapiente, ea laudantium doloribus vero hic! Quisquam autem ea sint eius, eligendi ducimus, magni illo beatae deleniti, culpa aliquam?</p>
+            <button class="b-b">Download Data</button>
+          </div>
+          <div class="col-8">
+              <h4>Demographic Data Correlation</h4>
+              <div id="filter">
+                <div id="yearfilter">
+                    <button id="allyear" value="false" onclick="allyear();">Show All Year Instead</button>
+                    <input type="range" min="1991" max="2016" value="1993" class="selectors slider" id="yearRange">
+                    <span>Year: <span id="selectedyear">1993</span></span>
+                </div>
+            
+                <div id="selectors">
+                    <form>
+                        <select id="partA" class="selectors">
+                            <option value="gender" selected="selected">Gender</option>
+                            <option value="ethnic">Ethnicity</option>
+                            <option value="grade">Grade</option>
+                            <option value="county">County</option>
+                        </select>
+                    </form>
+                    <span>To</span>
+                    <form>
+                        <select id="partB" class="selectors">
+                            <option value="gender">Gender</option>
+                            <option value="ethnic" selected="selected">Ethnicity</option>
+                            <option value="grade">Grade</option>
+                            <option value="county">County</option>
+                        </select>
+                    </form>
+                    <span id="warning"></span>
+                </div>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    
 
     <div id="sankey"></div>
     <div id="bar"></div>

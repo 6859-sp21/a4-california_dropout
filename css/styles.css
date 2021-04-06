@@ -1,22 +1,41 @@
 #sankey {
     position: fixed;
-    left: 5vh;
-    right: 50vw;
-    top: 30vh;
-    bottom: 10vh;
+    left: 30vw;
+    right: 10vw;
+    top: 25vh;
+    bottom: 45vh;
 }
-
 #bar {
     fill: steelblue;
     position: fixed;
-    left: 50vw;
-    right: 10vh;
-    top: 30vh;
+    left: 30vw;
+    right: 10vw;
+    top: 60vh;
     bottom: 10vh;
 }
-
-#yearfilter {
+#title {
+    margin: 20px  100px;
+}
+#title > h1 {
+    font-weight: 800;
+    font-size: 60px;
+}
+.container {
     position: fixed;
+    left: 5vw;
+}
+
+.background {
+    text-align: left;
+}
+#filter {
+    display: inline-flex;
+    padding: 0 30px;
+    justify-content: space-between;
+    z-index: 9999;
+}
+#yearfilter {
+    position:static;
     left: calc(10vh + 20px);
     right: 10vh;
     top: 20vh;
@@ -24,10 +43,11 @@
 }
 
 #selectors {
-    position: fixed;
-    left: calc(10vh + 20px);
-    right: 10vh;
-    top: calc(30vh - 50px);
+    position: static;
+    justify-content: space-between;
+    /* left: 0; */
+    right: 0;
+    /* top: calc(30vh - 50px); */
     display: flex;
 }
 
@@ -59,4 +79,9 @@
 
 .link:hover {
     stroke-opacity: 1;
+}
+
+.b-b {
+    background-color: black;
+    color: white;
 }
