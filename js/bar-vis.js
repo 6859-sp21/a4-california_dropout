@@ -26,7 +26,7 @@ function barbar() {
             .attr("font-size", "24px")
             .text("Number of Dropouts in California from 1991-2016")
 
-    d3.csv("/sankeydata/bar-test.csv").then((original_data)=>{
+    d3.csv("sankeydata/bar-test.csv").then((original_data)=>{
 
         // sum the dropout numbers and save to data
         var aggregated_data = {};
