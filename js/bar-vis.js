@@ -22,8 +22,8 @@ function barbar() {
         g.append("text")
             .attr("transform", "translate(100,0)")
             .attr("x", 0)
-            .attr("y", 70)
-            .attr("font-size", "15px")
+            .attr("y", 60)
+            .attr("font-size", "12px")
             .attr("stroke", "black")
             .text("Number of Dropouts in California from 1991-2016")
 
@@ -52,7 +52,7 @@ function barbar() {
 
         var xScale = d3.scaleBand()
                         .domain(data.map(d => d.begin_year))
-                        .range ([0, widthbar]).padding(0.2),
+                        .range ([0, widthbar-100]).padding(0.2),
             yScale = d3.scaleLinear()
                         .domain([0, d3.max(data, function(d) { return d.dropout; })])
                         .range ([heightbar, 0]);
