@@ -65,7 +65,7 @@ function barbar() {
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(xScale))
             .append("text")
-            .attr("y", heightbar - 480)
+            .attr("y", heightbar - 490)
             .attr("x", widthbar - 400)
             .attr("font-size", "10px")
             .attr("text-anchor", "end")
