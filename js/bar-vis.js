@@ -108,7 +108,7 @@ function barbar() {
             .style('text-anchor', 'middle')
             .text(d => d.dropout)
         
-        document.getElementById("bar").appendChild(svg.node());
+        document.getElementById("bar").appendChild(g.node());
     });
 }
 barbar();
