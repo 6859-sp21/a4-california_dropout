@@ -1,7 +1,7 @@
 #sankey {
     position: fixed;
-    left: 10vh;
-    right: 10vh;
+    left: 5vh;
+    right: 50vw;
     top: 30vh;
     bottom: 10vh;
 }
@@ -9,11 +9,10 @@
 #bar {
     fill: steelblue;
     position: fixed;
-    left: 50vh;
-    right: 30vh;
+    left: 50vw;
+    right: 10vh;
     top: 30vh;
     bottom: 10vh;
-    display: block;
 }
 
 #yearfilter {
