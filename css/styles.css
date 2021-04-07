@@ -9,6 +9,14 @@
     fill: steelblue;
     position: fixed;
     left: 29vw;
+    right: 40vw;
+    top: 60vh;
+    bottom: 10vh;
+}
+#bar2 {
+    fill: steelblue;
+    position: fixed;
+    left: 58vw;
     right: 10vw;
     top: 60vh;
     bottom: 10vh;
