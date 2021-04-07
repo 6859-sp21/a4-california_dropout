@@ -26,7 +26,7 @@ function eventTable(year) {
                     .attr("height", heightbar)
 	var thead = table.append('thead')
 	var	tbody = table.append('tbody');
-    var columns = ['year', 'events'];
+    var columns = ['events'];
 
 	// append the header row
 	thead.append('tr')
@@ -53,6 +53,7 @@ function eventTable(year) {
         })
         .enter()
         .append('td')
+            .attr("font-size", "5px")
             .text(function (d) { return d.value; });
 
     });
