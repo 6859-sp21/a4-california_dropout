@@ -60,3 +60,16 @@
 .link:hover {
     stroke-opacity: 1;
 }
+
+table {
+    width:15%;
+    float: right;
+  }
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 15px;
+    text-align: center;
+  }
