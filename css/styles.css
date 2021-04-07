@@ -1,6 +1,6 @@
 #sankey {
     position: fixed;
-    left: 30vw;
+    left: 29vw;
     right: 10vw;
     top: 25vh;
     bottom: 45vh;
@@ -8,7 +8,7 @@
 #bar {
     fill: steelblue;
     position: fixed;
-    left: 30vw;
+    left: 29vw;
     right: 10vw;
     top: 60vh;
     bottom: 10vh;
@@ -27,10 +27,11 @@
 
 .background {
     text-align: left;
+    border-right: 10px;
 }
 #filter {
     display: inline-flex;
-    padding: 0 30px;
+    padding: 0 30px 0 0;
     justify-content: space-between;
     z-index: 9999;
 }
@@ -45,8 +46,8 @@
 #selectors {
     position: static;
     justify-content: space-between;
-    /* left: 0; */
-    right: 0;
+    padding-left: 150px;
+    /* right: 0; */
     /* top: calc(30vh - 50px); */
     display: flex;
 }
