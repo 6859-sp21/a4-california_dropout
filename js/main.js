@@ -35,6 +35,7 @@ function updateS() {
     if (partA !== partB) {
         updatesankey(partA, partB, year);
         eventTable(year);
+        drawGeomap(year);
         document.getElementById("warning").innerHTML = "";
     } else {
         document.getElementById("warning").innerHTML = "Please make sure that you are comparing different data";
