@@ -21,7 +21,7 @@ var columes = {
 
 function geo_subgraph(type, county, load) {
 
-    d3.json("sankeydata/county-" + type + ".json").then(function (data) {
+    d3.json("./sankeydata/county-" + type + ".json").then(function (data) {
         data = data[county];
 
         let barData = [],
