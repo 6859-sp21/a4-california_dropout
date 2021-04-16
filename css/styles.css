@@ -1,50 +1,129 @@
-#sankey {
-    position: fixed;
-    left: 29vw;
-    right: 10vw;
-    top: 25vh;
-    bottom: 45vh;
-}
-#bar {
-    fill: steelblue;
-    position: fixed;
-    left: 29vw;
-    right: 40vw;
-    top: 60vh;
-    bottom: 10vh;
-}
-#bar2 {
-    fill: steelblue;
-    position: fixed;
-    left: 58vw;
-    right: 10vw;
-    top: 60vh;
-    bottom: 10vh;
-}
-#title {
-    margin: 20px  100px;
-}
-#title > h1 {
-    font-weight: 800;
-    font-size: 60px;
-}
-.container {
-    position: fixed;
-    left: 5vw;
+:root {
+    --primary: white;
+    --text: #ffb997;
+    --secondary: #843b62;
+    --accent: #f67e7d;
+    --background: #233342;
+    --lightbackground: #621940;
 }
 
+/*body*/
+body {
+    background: var(--background);
+    position: static;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 50px;
+    /*font setting*/
+    font-family: 'Mulish', sans-serif;
+    color: var(--primary);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 18px;
+    overflow-y: scroll;
+}
+
+/*title*/
+#title {
+    height: 100px;
+}
+
+#title > h1 {
+    font-weight: 800;
+    margin-bottom: 0;
+}
+
+.question {
+    font-size: 20px;
+    font-style: italic;
+    color: var(--accent);
+}
+
+/*container*/
+.info {
+    margin-top: 20px;
+    height: calc(100vh - 240px);
+}
+
+/*background*/
 .background {
-    text-align: left;
-    border-right: 10px;
+    padding-right: 20px;
+    border-right: dotted 1px var(--secondary);
+    color: var(--text);
+    height: 100%;
 }
-#filter {
-    display: inline-flex;
-    padding: 0 30px 0 0;
+
+.background > h4 {
+    color: var(--primary);
+}
+
+.pill {
+    border: none;
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 600;
+    color: var(--background);
+    background: var(--primary);
+}
+
+.pill:hover {
+    color: var(--primary);
+    background: var(--accent);
+}
+
+.pill > select{
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    outline: none !important;
+}
+/*correlation*/
+.correlation {
+    padding-left: 20px;
+    height: 100%;
+}
+
+.sankeytitle {
+    height: 80px;
+}
+
+#sankey {
+    height: calc(70vh - 300px);
+}
+
+.comparisons {
+    display: flex;
     justify-content: space-between;
-    z-index: 9999;
 }
+
+.subgraphs {
+    height: 30vh;
+    width: calc(50% - 15px);
+}
+
+.subinfo {
+    width: 200px;
+    height: 100%;
+    color: var(--primary);
+    overflow-y: scroll;
+}
+
+#filter {
+    display: flex;
+    justify-content: space-between;
+}
+
+#yearRange {
+    display: none;
+}
+
 #yearfilter {
-    position:static;
+    position: static;
     left: calc(10vh + 20px);
     right: 10vh;
     top: 20vh;
@@ -52,12 +131,9 @@
 }
 
 #selectors {
-    position: static;
-    justify-content: space-between;
-    padding-left: 150px;
-    /* right: 0; */
-    /* top: calc(30vh - 50px); */
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #selectors > span {
@@ -66,6 +142,11 @@
 
 #warning {
     color: firebrick;
+    max-width: 200px;
+    height: 0;
+    margin-top: -55px;
+    text-align: right;
+    margin-right: 5px;
 }
 
 .node rect {
@@ -82,28 +163,12 @@
 
 .link {
     fill: none;
-    /*  stroke: #000;*/
-    stroke-opacity: .5;
+    stroke: #000;
+    stroke-opacity: .3;
 }
 
-.link:hover {
-    stroke-opacity: 1;
-}
-
-table {
-    width:15%;
-    float: right;
-  }
-  table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-  }
-  th, td {
-    padding: 15px;
-    text-align: center;
-  }
-  
-.b-b {
-    background-color: black;
-    color: white;
+/* Geo sub graph */
+.geo-sub {
+    height: 30vh;
+    width: calc(100% - 15px);
 }
