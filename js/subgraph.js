@@ -20,7 +20,7 @@ var columes = {
 };
 
 function subgraph(N, C, load) {
-    d3.csv("data/dropoutdata_cleaned.csv").then(function (data) {
+    d3.csv("./data/dropoutdata_cleaned.csv").then(function (data) {
 
         // create container for new fitered data
         let filtereddata = {},
