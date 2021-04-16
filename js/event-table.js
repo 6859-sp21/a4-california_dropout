@@ -26,7 +26,7 @@ function eventTable(year) {
                     .attr("width", widthbar)
                     .attr("height", heightbar);
 
-    d3.csv("sankeydata/a4-cali-dropout-events.csv").then((data)=>{
+    d3.csv("./data/a4-cali-dropout-events.csv").then((data)=>{
        // create a row for each object in the data
        data = data.filter((d)=> d.year == year);
 
