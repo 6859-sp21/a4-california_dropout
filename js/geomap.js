@@ -45,9 +45,8 @@ function drawGeomap(year) {
     
     mercator = d3.geoMercator()
             .center([0,0])
-            .scale(3700)
-            // .scale((1 << 18) / (28 * Math.PI))
-            .translate([8072,3030]);
+            .scale(3410)
+            .translate([7430,2750]);
                         
     var path = d3.geoPath().projection(mercator);
     

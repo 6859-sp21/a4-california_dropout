@@ -97,7 +97,7 @@ body {
     background: var(--background);
 }
 #page3 {
-    background: darkslategray;
+    background: var(--background);
 }
 
 /*title*/
@@ -250,13 +250,13 @@ body {
 
 /* Geo sub graph */
 .geo-sub {
-    height: 90vh;
+    height: 77vh;
     width: calc(100% - 15px);
 }
 
 #calimap {
-    height: 90vh;
-    width: 80vh;
+    height: 77vh;
+    width: 73vh;
 }
 
 .calimapcontainer {
