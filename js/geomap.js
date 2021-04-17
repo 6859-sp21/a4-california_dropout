@@ -44,15 +44,16 @@ function drawGeomap(year) {
                         
     var path = d3.geoPath().projection(mercator);
     
-    var svg = d3.select("#calimap").append("svg")
+    var svg = d3.select("#calimap")
+        .append("svg")
         .attr("width", mapWidth)
         .attr("height", mapHeight);
     
     d3.json("./data/california-counties@1.topojson").then(function(json) {
-        const counties = topojson.feature(json, json.objects.counties);
+        let counties = topojson.feature(json, json.objects.counties);
     
         // <g> grouping element
-        const g = svg.append('g');
+        let g = svg.append('g');
     
         // get another data
         d3.json("./sankeydata/county-gender.json").then(function(json_data) {
@@ -60,7 +61,7 @@ function drawGeomap(year) {
             // filter data
             console.log(json_data)
             var county2num = {};
-            const selectedYear = year;
+            let selectedYear = year;
             for (var key in json_data) {
                 county2num[key] = 0;
                 for (var gender in json_data[key]) {
@@ -74,7 +75,7 @@ function drawGeomap(year) {
             console.log(county2num)
     
             // color
-            color = d3.scaleSequentialQuantile(Object.values(county2num), d3.interpolateBlues);
+            let shabicolor = d3.scaleSequentialQuantile(Object.values(county2num), d3.interpolateBlues);
     
             g.append("g")
             .selectAll("path")
@@ -86,7 +87,7 @@ function drawGeomap(year) {
             .style('fill', function(d) {
                 if (county2num[d.properties.NAME] != undefined) {
                     // console.log(color(county2num[d.properties.NAME]));
-                    return county2num[d.properties.NAME] == 0 ? "rgb(213,222,217)" : color(county2num[d.properties.NAME]);
+                    return county2num[d.properties.NAME] == 0 ? "rgb(213,222,217)" : shabicolor(county2num[d.properties.NAME]);
                 } else {
                     console.log(d.properties.NAME);
                     return "rgb(213,222,217)";
@@ -100,7 +101,7 @@ function drawGeomap(year) {
             // .text(d => d.properties.County)
     
             // tooltip
-            const tooltip = svg.append("g");
+            let tooltip = svg.append("g");
 
             svg
             .selectAll(".county")
@@ -111,11 +112,8 @@ function drawGeomap(year) {
                     ${county2num[d.properties.NAME] != undefined ? county2num[d.properties.NAME] : 0} dropout(s)`
                 )
                 tooltip.attr("transform", `translate(${d3.pointer(event, this)})`);
-                
-                d3.select(this)
-                    .attr("stroke", "red")
-                    .raise();
                 })
+                
             .on("touchend mouseleave", function() {
                 tooltip.call(callout, null);
                 

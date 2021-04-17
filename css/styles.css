@@ -161,9 +161,9 @@ body {
     opacity: 1;
 }
 
-.link {
+.sankeylink {
     fill: none;
-    stroke: #000;
+    /* stroke: #000; */
     stroke-opacity: .3;
 }
 

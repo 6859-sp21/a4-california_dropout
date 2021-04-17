@@ -115,12 +115,12 @@ function updatesankey(first, second, year) {
         // add in the links
         var link = sankeysvg
             .append("g")
-            .selectAll(".link")
+            .selectAll(".sankeylink")
             .data(graph.links)
             .enter()
             .append("path")
             .attr("class", function (d) {
-                return "link " + "link" + d.source.name.replace(/\s/g, "") + " link" + d.target.name.replace(/\s/g, "");
+                return "sankeylink " + "link" + d.source.name.replace(/\s/g, "") + " link" + d.target.name.replace(/\s/g, "");
             })
             .attr("d", d3.sankeyLinkHorizontal())
             .style("stroke", function (d) {
