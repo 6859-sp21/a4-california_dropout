@@ -33,21 +33,28 @@ function drawGeomap(year) {
     
     format = d => `County: ${d}`
     
-    var mapWidth = 640,
-        mapHeight = 640;
+    var mapWidth = document.getElementById("calimap").offsetWidth,
+        mapHeight = document.getElementById("calimap").offsetHeight;
+
+        var svg = d3.select("#calimap")
+        .append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", "0 0 " + mapWidth + " " + mapHeight)
     
-        mercator = d3
-            .geoMercator()
-            .center([-119, 37.4])
-            .scale((1 << 18) / (28 * Math.PI))
-            .translate([320, 320])
+
+    
+    mercator = d3.geoMercator()
+            .center([0,0])
+            .scale(3700)
+            // .scale((1 << 18) / (28 * Math.PI))
+            .translate([8072,3030]);
                         
     var path = d3.geoPath().projection(mercator);
     
-    var svg = d3.select("#calimap")
-        .append("svg")
-        .attr("width", mapWidth)
-        .attr("height", mapHeight);
+    // var svg = d3.select("#calimap")
+    //     .append("svg")
+    //     .attr("width", mapWidth)
+    //     .attr("height", mapHeight);
     
     d3.json("./data/california-counties@1.topojson").then(function(json) {
         let counties = topojson.feature(json, json.objects.counties);

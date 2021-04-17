@@ -1,4 +1,4 @@
-ID,CDS,Total,Female,Male,NativeAmericanorIndian,Asian,Pacific,Filipino,Hispanic,AfricanAmerican,White,MultipleRace,NoRace,D7,D8,D9,D10,D11,D12,Academic_Year,County,School,City,Zip,State,Latitude,Longitude
+ID,CDS,Total,Female,Male,NativeAmericanorIndian,Asian,Pacific,Filipino,Hispanic,AfricanAmerican,White,MultipleRace,NoRace,Grade7,Grade8,Grade9,Grade10,Grade11,Grade12,Academic_Year,County,School,City,Zip,State,Latitude,Longitude
 0,1100170109835,7,7,0,0,0,0,0,0,0,7,0,0,1,2,1,1,1,1,2010,Alameda,FAME Public Charter,Newark,94560-5359,CA,37.521436,-121.99391
 1,1100170109835,12,12,0,0,0,0,0,0,0,12,0,0,1,5,2,1,1,2,2011,Alameda,FAME Public Charter,Newark,94560-5359,CA,37.521436,-121.99391
 2,1100170130401,80,12,68,0,0,0,0,0,80,0,0,0,2,3,6,10,9,50,2009,Alameda,Alameda County Juvenile Hall/Court,San Leandro,94578-1005,CA,37.712878,-122.11173

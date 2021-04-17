@@ -1,6 +1,6 @@
-var barwidth = 200,
-    barheight = 200, // set svg width and height
-    barmargin = 20,
+var barwidth = document.getElementById("bar-test").offsetWidth,
+    barheight = document.getElementById("bar-test").offsetHeight / 3, // set svg width and height
+    barmargin = 40,
     barmax = 60, // hard coded maximum number of paths (60 counties)
     subyearScale = d3.scaleLinear()
     .domain([1991, 2016])
@@ -15,12 +15,11 @@ for (i = 1991; i < 2017; i++) { // only for transition purpose
 var columes = {
     gender: ["Female", "Male"],
     ethnic: ["NativeAmericanorIndian", "Asian", "Pacific", "Filipino", "Hispanic", "AfricanAmerican", "White", "MultipleRace", "NoRace"],
-    grade: ["D7", "D8", "D9", "D10", "D11", "D12"],
+    grade: ["Grade7", "Grade8", "Grade9", "Grade10", "Grade11", "Grade12"],
     county: ["Alameda", "Alpine", "Amador", "Butte", "Calaveras", "Colusa", "Contra Costa", "Del Norte", "El Dorado", "Fresno", "Glenn", "Humboldt", "Imperial", "Inyo", "Kern", "Kings", "Lake", "Lassen", "Los Angeles", "Madera", "Marin", "Mariposa", "Mendocino", "Merced", "Modoc", "Mono", "Monterey", "Napa", "Nevada", "Orange", "Placer", "Plumas", "Riverside", "Sacramento", "San Benito", "San Bernardino", "San Diego", "San Francisco", "San Joaquin", "San Luis Obispo", "San Mateo", "Santa Barbara", "Santa Clara", "Santa Cruz", "Shasta", "Sierra", "Siskiyou", "Solano", "Sonoma", "Stanislaus", "Sutter", "Tehama", "Trinity", "Tulare", "Tuolumne", "Ventura", "Yolo", "Yuba", "NA"]
 };
 
 function geo_subgraph(type, county, load) {
-
     d3.json("./sankeydata/county-" + type + ".json").then(function (data) {
         data = data[county];
 
@@ -65,7 +64,7 @@ function geo_subgraph(type, county, load) {
             .range(["orange", "blue"]);
         } else {
             colorScheme = d3.scaleOrdinal()
-            .domain(["D7", "D8", "D9", "D10", "D11", "D12"])
+            .domain(["Grade7", "Grade8", "Grade9", "Grade10", "Grade11", "Grade12"])
             .range(["red","orange","yellow","green", "teal", "blue"]);
         }
 

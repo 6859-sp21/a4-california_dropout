@@ -29,76 +29,102 @@
 </head>
 
 <body>
-    <section id="title">
-        <h1>CALIFORNIA PUBLIC SCHOOL DROPOUT</h1>
-        <h5 class="question">What are the key drivers of Public School Dropout in California?</h5>
-    </section>
-
-
-    <div class="county-sub row">
-        <div class="col-6">
-            <div id="calimap"></div>
-        </div>
-        <div class="col-6">
-            <div class="row">
-                <div class="col-12">
-                    <div class="geo-sub" id="bar-test"></div>
+    <div id="CurrentPage">
+        <div id="pageAll">
+            <section id="page1" class="page">
+                <div id="title">
+                    <h1>CALIFORNIA PUBLIC SCHOOL DROPOUT</h1>
+                    <h5 class="question">What are the key drivers of Public School Dropout in California?</h5>
                 </div>
 
-            </div>
-        </div>
+                <div class="background">
+                    <h4>Background Info</h4>
+                    <p>Every year, over 1.2 million students drop out of high school in the United States alone. Therefore, it is important for the education officials to understand who is more likely to drop out, where students are more likely to drop out, and which grade students usually drop out.</p>
+                    <div id="geo"></div>
+                    <p>In our project, we focus on California and develop an interactive visualization to understand what are the key drivers of dropouts among public high school students in California.</p>
+                    <button class="pill" onclick="location.href='github.com/6859-sp21/a4-california_dropout/tree/main/data';">Download Data</button>
+                </div>
+            </section>
+            <section id="page2" class="page">
+                <div id="title">
+                    <h1>CALIFORNIA PUBLIC SCHOOL DROPOUT</h1>
+                    <h5 class="question">What are the key drivers of Public School Dropout in California?</h5>
+                </div>
+                <div class="county-sub row">
+                    <div class="col-8 calimapcontainer">
+                        <div id="calimap"></div>
 
-    </div>
-
-    <div class="info row">
-        <div class="col-2 background">
-            <h4>Background Info</h4>
-            <p>Every year, over 1.2 million students drop out of high school in the United States alone. Therefore, it is important for the education officials to understand who is more likely to drop out, where students are more likely to drop out, and which grade students usually drop out.</p>
-            <div id="geo"></div>
-            <p>In our project, we focus on California and develop an interactive visualization to understand what are the key drivers of dropouts among public high school students in California.</p>
-            <button class="pill" onclick="location.href='https://github.com/6859-sp21/a4-california_dropout/tree/main/data';">Download Data</button>
-        </div>
-        <div class="col-8 correlation">
-            <div class="sankeytitle">
-                <h5 class="question">What are the undelying causes of dropouts?</h5>
-                <div id="filter">
-                    <div id="yearfilter">
-                        <button id="allyear" class="pill" value="true" onclick="allyear();">All Year (Click to Expand Year Selector)</button>
-                        <input type="range" min="1991" max="2016" value="1993" class="selectorsT slider" id="yearRange">
-                        <span><span id="selectedyear"></span></span>
                     </div>
-                    <div id="selectors">
-                        <span id="warning"></span>
-                        <form class="pill">
-                            <select id="partA" class="selectorsC">
-                                <option value="gender" selected="selected">Gender</option>
-                                <option value="ethnic">Ethnicity</option>
-                                <option value="grade">Grade</option>
-                                <option value="county">County</option>
-                            </select>
-                        </form>
-                        <span>To</span>
-                        <form class="pill">
-                            <select id="partB" class="selectorsC">
-                                <option value="gender">Gender</option>
-                                <option value="ethnic" selected="selected">Ethnicity</option>
-                                <option value="grade">Grade</option>
-                                <option value="county">County</option>
-                            </select>
-                        </form>
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="geo-sub" id="bar-test">
+                                    <!-- <div class="barethnic"></div>
+                                    <div class="bargender"></div>
+                                    <div class="bargrade"></div> -->
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div id="sankey"></div>
-            <div class="comparisons">
-                <div class="subgraphs" id="partAGraph"></div>
-                <div class="subgraphs" id="partBGraph"></div>
-            </div>
-        </div>
-        <div class="col-2 subinfo" id="event">
+            </section>
+            <section id="page3" class="page">
+                <div class="sankeytitle">
+                    <h5 class="question">What are the undelying causes of dropouts?</h5>
+                    <div id="filter">
+                        <div id="yearfilter">
+                            <button id="allyear" class="pill" value="true" onclick="allyear();">All Year (Click to Expand Year Selector)</button>
+                            <input type="range" min="1991" max="2016" value="1993" class="selectorsT slider" id="yearRange">
+                            <span><span id="selectedyear"></span></span>
+                        </div>
+                        <div id="selectors">
+                            <span id="warning"></span>
+                            <form class="pill">
+                                <select id="partA" class="selectorsC">
+                                    <option value="gender" selected="selected">Gender</option>
+                                    <option value="ethnic">Ethnicity</option>
+                                    <option value="grade">Grade</option>
+                                    <option value="county">County</option>
+                                </select>
+                            </form>
+                            <span>To</span>
+                            <form class="pill">
+                                <select id="partB" class="selectorsC">
+                                    <option value="gender">Gender</option>
+                                    <option value="ethnic" selected="selected">Ethnicity</option>
+                                    <option value="grade">Grade</option>
+                                    <option value="county">County</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="info row">
+                    <div class="col-3">
+                        <div class="comparisons">
+                            <div class="subgraphs" id="partAGraph"></div>
+                        </div>
+                    </div>
+                    <div class="col-4 correlation">
+                        <div id="sankey"></div>
+                    </div>
+                    <div class="col-3 comparisons">
+                        <div class="subgraphs" id="partBGraph"></div>
+                    </div>
+                    <div class="col-2 subinfo" id="event"></div>
+                </div>
+            </section>
         </div>
     </div>
-
+    <div id="pageToggle">
+        <button id="button1" onClick="toPage(1)" class="pageButton active">
+            <span>Title One</span></button>
+        <button id="button2" onClick="toPage(2)" class="pageButton">
+            <span>Title Two</span></button>
+        <button id="button3" onClick="toPage(3)" class="pageButton">
+            <span>Title Three</span></button>
+    </div>
 
     
 

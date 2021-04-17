@@ -218,7 +218,7 @@ function updatesankey(first, second, year) {
             .attr("dy", "0.35em")
             .attr("text-anchor", "end")
             .text(function (d) {
-                return d.name;
+                    return d.name;
             })
             .filter(function (d) {
                 return d.x0 < sankeywidth / 2;

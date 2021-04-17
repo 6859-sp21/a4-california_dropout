@@ -4,7 +4,7 @@
     --secondary: #843b62;
     --accent: #f67e7d;
     --background: #233342;
-    --lightbackground: #621940;
+    --lightbackground: #8AA8BC;
 }
 
 /*body*/
@@ -15,14 +15,89 @@ body {
     right: 0;
     top: 0;
     bottom: 0;
-    padding: 50px;
+    /* padding: 50px; */
     /*font setting*/
     font-family: 'Mulish', sans-serif;
     color: var(--primary);
     font-size: 16px;
     font-weight: 300;
     line-height: 18px;
-    overflow-y: scroll;
+}
+
+
+#CurrentPage {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+#pageAll {
+    width: 300vw;
+    display: flex;
+    margin-left: 0;
+    transition: All 0.2s;
+}
+
+.page {
+    width: 100vw;
+    height: 100vh;
+    padding: 40px;
+}
+
+#pageToggle {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.pageButton {
+    z-index: 100;
+    border: none;
+    height: 5px;
+    width: 100px;
+    margin: 10px;
+    opacity: 0.3;
+}
+
+.pageButton > span {
+    position: relative;
+    top: -25px;
+    color: white;
+    opacity: 0;
+}
+
+.pageButton:hover,
+.pageButton:hover > span{
+    opacity: 1 !important;
+    cursor: pointer;
+}
+
+.pageButton.active {
+    opacity: 0.8;
+    width: 200px;
+}
+
+
+
+
+
+
+/*assistive*/
+
+#page1 {
+    background: var(--background);
+}
+#page2 {
+    background: var(--background);
+}
+#page3 {
+    background: darkslategray;
 }
 
 /*title*/
@@ -44,7 +119,7 @@ body {
 /*container*/
 .info {
     margin-top: 20px;
-    height: calc(100vh - 240px);
+    height: 75vh;
 }
 
 /*background*/
@@ -93,17 +168,19 @@ body {
 }
 
 #sankey {
-    height: calc(70vh - 300px);
+    height: 100%;
+    width: 100%;
 }
 
 .comparisons {
     display: flex;
     justify-content: space-between;
+    height: 100%;
 }
 
 .subgraphs {
-    height: 30vh;
-    width: calc(50% - 15px);
+    height: 100%;
+    width: 100%;
 }
 
 .subinfo {
@@ -173,6 +250,16 @@ body {
 
 /* Geo sub graph */
 .geo-sub {
-    height: 30vh;
+    height: 90vh;
     width: calc(100% - 15px);
+}
+
+#calimap {
+    height: 90vh;
+    width: 80vh;
+}
+
+.calimapcontainer {
+    display: flex;
+    justify-content: center;
 }

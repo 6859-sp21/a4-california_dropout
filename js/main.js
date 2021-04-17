@@ -1,3 +1,15 @@
+function toPage(n) {
+    document.getElementById("pageAll").style.marginLeft = (n - 1) * -100 + "vw";
+    
+    for (let i = 1; i < 4; i++) {
+        if (i == n) {
+            document.getElementById("button" + i).className = "pageButton active";
+        } else {
+            document.getElementById("button" + i).className = "pageButton";
+        }
+    }
+}
+
 $(".selectorsC").change(function () {
     updateS("Category");
 });
@@ -51,6 +63,10 @@ function updateS(type) { // type is for different trigger scenarios
         updatesankey(partA, partB, year);
         subgraph("A", partA, type);
         subgraph("B", partB, type);
+
+        // geo_subgraph("ethnic", "Los Angeles", type);
+        // geo_subgraph("grade", "Los Angeles", type);
+        // geo_subgraph("gender", "Los Angeles", type);
 
         eventTable(year);
 
