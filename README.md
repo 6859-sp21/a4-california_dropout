@@ -54,7 +54,9 @@ python3 -m http.server
 ## Citations
 
 \[1\]: https://www.dosomething.org/us/facts/11-facts-about-high-school-dropout-rates
+
 \[2\]: https://www.cde.ca.gov/ds/sd/sd/filesdropouts.asp (dropout dataset) 
+
 \[3\]: https://www.cde.ca.gov/nr/re/hd/yr96-10tl.asp (reform event dataset)
 
 
