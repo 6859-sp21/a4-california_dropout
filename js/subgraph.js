@@ -125,7 +125,7 @@ function subgraph(N, C, load) {
 
         // call axis
         d3.select(".xScale" + N)
-            .call(d3.axisBottom(xScale));
+            .call(d3.axisBottom(xScale).tickFormat(d3.format("d")));
 
         d3.select(".yScale" + N)
             .transition()

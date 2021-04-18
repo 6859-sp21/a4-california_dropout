@@ -20,7 +20,6 @@ function eventTable(year) {
     if (d3.select('#event').size() > 0) {
         d3.select('#event').selectAll('p').remove();
         d3.select('#event').selectAll('ul').remove();
-        console.log("REMOVE OLD TABLE");
     }
 
     if (year == "All") {
@@ -32,9 +31,7 @@ function eventTable(year) {
        // create a row for each object in the data
        data = data.filter((d)=> d.year == year);
 
-       console.log("print data size");
-       console.log(data.length); 
-       var head = d3.select("#event").append("p").text("Key reform events"); 
+    //    var head = d3.select("#event").append("p").text("Key reform events"); 
         var body = d3.select('#event').append('ul')
         .attr("width", widthbar)
         .attr("height", heightbar);  
@@ -44,11 +41,11 @@ function eventTable(year) {
              .data(data)
              .join("li")
                  .text(d => d.events)
-                 .style("font-size", "10px");
+                 .style("font-size", "14px");
        } else {
            body.append("li")
            .text("No reform in " + year)
-           .style("font-size", "10px");;
+           .style("font-size", "14px");;
        }
     })
 

@@ -95,11 +95,11 @@ function drawGeomap(year) {
                     // console.log(color(county2num[d.properties.NAME]));
                     return county2num[d.properties.NAME] == 0 ? "rgb(213,222,217)" : shabicolor(county2num[d.properties.NAME]);
                 } else {
-                    console.log(d.properties.NAME);
+                    // console.log(d.properties.NAME);
                     return "rgb(213,222,217)";
                 }})
             .style("stroke", "white")
-            .style('stroke-width', 1)
+            .style('stroke-width', 0)
             .append("text")
             .text(function(d){
                 return d.properties.NAME;
@@ -123,15 +123,39 @@ function drawGeomap(year) {
             .on("touchend mouseleave", function() {
                 tooltip.call(callout, null);
                 
-                d3.select(this)
-                    .attr("stroke", null)
-                    .lower();
+                // d3.select(this)
+                //     .attr("stroke", null)
+                //     .lower();
             })  
             .on("click", function(event,d){
+
                 let selectedcounty = d.properties.NAME;
+                let selectedcountynum = county2num[d.properties.NAME] || 0;
+
                 geo_subgraph("ethnic", selectedcounty, "update");
                 geo_subgraph("gender", selectedcounty, "update");
                 geo_subgraph("grade", selectedcounty, "update");
+                
+                UpdateCountyInfo(selectedcounty, selectedcountynum, "update");
+
+                d3.selectAll(".county")
+                    .style("stroke-width", 0)
+                    .style("stroke", "white")
+
+                    console.log(this);
+
+                d3.select(this)
+                    .style('z-index', 999999)
+                    .transition()
+                    .duration(200)
+                    .style("stroke", "black")
+                    .style("stroke-opacity", 1)
+                    .style('stroke-width', 1)
+
+
+
+
+
             })       
         })
 

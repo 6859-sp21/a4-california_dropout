@@ -174,6 +174,8 @@ function updatesankey(first, second, year) {
             .append("g")
             .attr("class", "node");
 
+            // console.log(graph.nodes);
+
         // add the rectangles for the nodes
         node.append("rect")
             .attr("class", function (d) {
@@ -218,7 +220,9 @@ function updatesankey(first, second, year) {
             .attr("dy", "0.35em")
             .attr("text-anchor", "end")
             .text(function (d) {
+                if(d.y1-d.y0 > 10){
                     return d.name;
+                };
             })
             .filter(function (d) {
                 return d.x0 < sankeywidth / 2;

@@ -7,6 +7,21 @@ var barwidth = document.getElementById("bar-test").offsetWidth,
     .range([0, barwidth - barmargin * 1.5]),
     initialpath = [];
 
+var insertLinebreaks = function (t, d, width) {
+    var el = d3.select(t);
+    var p = d3.select(t.parentNode);
+    p.append("foreignObject")
+        .attr('x', -width/2)
+        .attr("width", width)
+        .attr("height", 200)
+        .append("xhtml:p")
+        .attr('style','word-wrap: break-word; text-align:center;')
+        .html(d);    
+
+    el.remove();
+
+};
+
 for (i = 1991; i < 2017; i++) { // only for transition purpose
     initialpath.push([subyearScale(i), barheight - barmargin]);
 }
@@ -18,6 +33,8 @@ var columes = {
     grade: ["Grade7", "Grade8", "Grade9", "Grade10", "Grade11", "Grade12"],
     county: ["Alameda", "Alpine", "Amador", "Butte", "Calaveras", "Colusa", "Contra Costa", "Del Norte", "El Dorado", "Fresno", "Glenn", "Humboldt", "Imperial", "Inyo", "Kern", "Kings", "Lake", "Lassen", "Los Angeles", "Madera", "Marin", "Mariposa", "Mendocino", "Merced", "Modoc", "Mono", "Monterey", "Napa", "Nevada", "Orange", "Placer", "Plumas", "Riverside", "Sacramento", "San Benito", "San Bernardino", "San Diego", "San Francisco", "San Joaquin", "San Luis Obispo", "San Mateo", "Santa Barbara", "Santa Clara", "Santa Cruz", "Shasta", "Sierra", "Siskiyou", "Solano", "Sonoma", "Stanislaus", "Sutter", "Tehama", "Trinity", "Tulare", "Tuolumne", "Ventura", "Yolo", "Yuba", "NA"]
 };
+
+var shortenedRace = ["NAI", "A", "P", "F", "H", "AA", "W", "M", "N"];
 
 function geo_subgraph(type, county, load) {
     d3.json("./sankeydata/county-" + type + ".json").then(function (data) {
@@ -65,7 +82,7 @@ function geo_subgraph(type, county, load) {
         } else {
             colorScheme = d3.scaleOrdinal()
             .domain(["Grade7", "Grade8", "Grade9", "Grade10", "Grade11", "Grade12"])
-            .range(["red","orange","yellow","green", "teal", "blue"]);
+            .range(["#f67e7d", "#ff9796", "#fca5a4", "#ffb8b8", "#fac5c5", "#fcd9d9"]);
         }
 
         // set x and y remapping scales     
@@ -79,7 +96,7 @@ function geo_subgraph(type, county, load) {
 
         if (load == "init") {
 
-            d3.select("#bar-test")
+            d3.select("#bar" + type)
                 .append("svg")
                 .attr("width", barwidth)
                 .attr("height", barheight)
@@ -116,13 +133,23 @@ function geo_subgraph(type, county, load) {
         }
 
         // call axis
+        if(type=="ethnic"){
+            
         d3.select(".xScale" + type)
             .transition()
-            .call(d3.axisBottom(xScale));
+            .call(d3.axisBottom(xScale)
+            .tickFormat(function(d,i){return shortenedRace[i];}))
+
+        } else {
+            d3.select(".xScale" + type)
+            .transition()
+            .call(d3.axisBottom(xScale))
+            // .tickFormat(function(d,i){return shortenedRace[i];})
+        }
 
         d3.select(".yScale" + type)
             .transition()
-            .call(d3.axisLeft(yScale));
+            .call(d3.axisLeft(yScale).tickFormat(d3.format("d")));
 
         d3.selectAll(".barbar" + type)
             .data(barData)
@@ -141,9 +168,39 @@ function geo_subgraph(type, county, load) {
                 return colorScheme(d[type]);
             })
 
-     
+            
+    
     });
+
+    
 };
-geo_subgraph("ethnic", "Los Angeles", "init");
-geo_subgraph("grade", "Los Angeles", "init");
-geo_subgraph("gender", "Los Angeles", "init");
+
+// function updateEthnicticks(){
+//     // if(type=="ethnic"){
+//     //     let shortenedRace = ["NAI", "A", "P", "F", "H", "AA", "W", "M", "N"];
+//     //     let currentSVG = d3.selectAll(".xScale" + type);
+//     //     let ticks = currentSVG.selectAll(".tick text");
+
+//     //     ticks
+//     //     .attr("class", function(d,i){
+//     //         return ("ethnictick")
+//     //     })
+
+//     //     console.log(document.getElementsByClassName("ethnictick")[0].innerHTML);
+
+        
+
+
+//         let t = document.getElementsByClassName("xScaleethnic")[0].getElementsByTagName('g');
+//         for(let i = 0; i < t.length; i++){
+//             t[i].getElementsByTagName('text')[0].innerHTML = "aaa";
+//             console.log(t[i]);
+//             // t[i].getElementsByTagName('text')[0].classList = "sho";
+//             // t[i].innerHtml = shortenedRace[i-1];
+//         }
+    
+// }
+// geo_subgraph("ethnic", "Los Angeles", "init");
+// geo_subgraph("grade", "Los Angeles", "init");
+// geo_subgraph("gender", "Los Angeles", "init");
+// updateEthnicticks();

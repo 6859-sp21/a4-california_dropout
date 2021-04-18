@@ -79,6 +79,11 @@ function updateS(type) { // type is for different trigger scenarios
 
     // console change for debugging purpose
     console.log("data: " + partA + "-" + partB + "(" + year + ")");
+
+
 }
 
 updateS("init");
+geo_subgraph("ethnic", "Los Angeles", "init");
+geo_subgraph("grade", "Los Angeles", "init");
+geo_subgraph("gender", "Los Angeles", "init");
