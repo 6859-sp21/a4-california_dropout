@@ -3,11 +3,13 @@
     --text: #ffb997;
     --secondary: #843b62;
     --accent: #f67e7d;
-    --background: #233342;
+    --background: #14162B;
     --lightbackground: #8AA8BC;
 }
 
+
 /*body*/
+
 body {
     background: var(--background);
     position: static;
@@ -38,7 +40,7 @@ p > em {
 }
 
 #pageAll {
-    width: 300vw;
+    width: 400vw;
     display: flex;
     margin-left: 0;
     transition: All 0.2s;
@@ -76,7 +78,7 @@ p > em {
 }
 
 .pageButton:hover,
-.pageButton:hover > span{
+.pageButton:hover > span {
     opacity: 1 !important;
     cursor: pointer;
 }
@@ -86,24 +88,50 @@ p > em {
     width: 200px;
 }
 
+.landingleft {
+    width: 30vw;
+    height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
-
-
-
+.conclusionright {
+    margin-left: 40vw;
+    height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    text-align: right;
+}
 
 /*assistive*/
 
 #page1 {
-    background: var(--background);
+    background: url("../asset/landingbackground.png");
+    background-size: cover;
+    background-position: right;
 }
+
 #page2 {
     background: var(--background);
 }
+
 #page3 {
     background: var(--background);
 }
 
+#page4 {
+    background: url("../asset/conclusionbackground.png");
+    background-size: cover;
+    background-position: left;
+}
+
+
 /*title*/
+
 #title {
     height: 100px;
 }
@@ -119,18 +147,19 @@ p > em {
     color: var(--accent);
 }
 
+
 /*container*/
+
 .info {
     margin-top: 20px;
     height: 50vh;
 }
 
+
 /*background*/
+
 .background {
-    padding-right: 20px;
-    border-right: dotted 1px var(--secondary);
     color: var(--text);
-    height: 100%;
 }
 
 .background > h4 {
@@ -146,6 +175,7 @@ p > em {
     font-weight: 600;
     color: var(--background);
     background: var(--primary);
+    margin-top: 10px;
 }
 
 .pill:hover {
@@ -153,14 +183,17 @@ p > em {
     background: var(--accent);
 }
 
-.pill > select{
+.pill > select {
     border: none;
     background: none;
     padding: 0;
     margin: 0;
     outline: none !important;
 }
+
+
 /*correlation*/
+
 .correlation {
     padding-left: 20px;
     height: 100%;
@@ -177,11 +210,12 @@ p > em {
 
 .comparisons {
     display: flex;
-    flex-direction: column ;
+    flex-direction: column;
     height: 85%;
     margin-top: 30px;
 }
-.l-year{
+
+.l-year {
     text-align: center;
     top: 0;
 }
@@ -262,7 +296,9 @@ p > em {
     stroke-opacity: .3;
 }
 
+
 /* Geo sub graph */
+
 .geo-sub {
     height: 77vh;
     width: calc(100% - 15px);
@@ -286,7 +322,7 @@ p > em {
 }
 
 .sel-county {
-    float:right;
+    float: right;
     margin-top: -77vh;
     text-align: right;
     max-width: 300px;
@@ -301,6 +337,7 @@ p > em {
 
 .sel-county > p {
     font-size: 12px;
+    line-height: 14px;
 }
 
 .sub-legend {

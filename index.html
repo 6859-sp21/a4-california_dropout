@@ -2,76 +2,71 @@
 <html lang="en">
 
 <head>
-
     <title>California Dropout</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!--font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-
     <!--boostrap 'n libraries-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
     <!--D3 library-->
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="js/d3-sankey.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
     <script src="https://unpkg.com/topojson@3"></script>
     <script src="https://unpkg.com/topojson-client@3"></script>
-
     <!--styles-->
-    <link rel="stylesheet" href="css/styles.css">
-
-</head>
+    <link rel="stylesheet" href="css/styles.css"> </head>
 
 <body>
     <div id="CurrentPage">
         <div id="pageAll">
             <section id="page1" class="page">
-                <div id="title">
-                    <h1>CALIFORNIA PUBLIC SCHOOL DROPOUT</h1>
-                    <h5 class="question">What are the key drivers of Public School Dropout in California?</h5>
-                </div>
-
-                <div class="background">
-                    <h4>Background Info</h4>
-                    <p>Every year, over 1.2 million students drop out of high school in the United States alone. Therefore, it is important for the education officials to understand who is more likely to drop out, where students are more likely to drop out, and which grade students usually drop out.</p>
-                    <div id="geo"></div>
-                    <p>In our project, we focus on California and develop an interactive visualization to understand what are the key drivers of dropouts among public high school students in California.</p>
-                    <!-- <form method="get" action="./data/dropoutdata_cleaned.csv">
+                <div class="landingleft">
+                    <div>
+                        <h1>CALIFORNIA PUBLIC SCHOOL DROPOUT</h1>
+                        <h5 class="question">What are the key drivers of Public School Dropout in California?</h5> </div>
+                    <div class="background">
+                        <h4>Background Info</h4>
+                        <p>Every year, over 1.2 million students drop out of high school in the United States alone. Therefore, it is important for the education officials to understand who is more likely to drop out, where students are more likely to drop out, and which grade students usually drop out.</p>
+                        <div id="geo"></div>
+                        <p>In our project, we focus on California and develop an interactive visualization to understand what are the key drivers of dropouts among public high school students in California.</p>
+                        <!-- <form method="get" action="./data/dropoutdata_cleaned.csv">
                         <button class="pill" type="submit">Download Data</button>
                     </form> -->
-                    <button class="pill" onclick="location.href='http://github.com/6859-sp21/a4-california_dropout/tree/main/data';">Download Data</button>
+                        <button class="pill" onclick="location.href='http://github.com/6859-sp21/a4-california_dropout/tree/main/data';">Download Data</button>
+                    </div>
                 </div>
             </section>
             <section id="page2" class="page">
                 <div id="title">
                     <h1>CALIFORNIA DROP OUT BY COUNTY</h1>
-                    <h5 class="question">What do we know about the drop out condition all over California?</h5>
-                </div>
+                    <h5 class="question">What do we know about the drop out condition all over California?</h5> </div>
                 <div class="county-sub row">
                     <div class="col-7">
                         <div class="calimapcontainer">
                             <div class="geo-describe">
-                                <p>The California Department of Education released data from 1991 to 2017 on the number of drop out students per county, labeled with their relative gender, ethnicity and grade. <em>Though it is difficult to calculate the percentage of drop-out due to the lack of initial enrollment data</em>, we can see that Los Angeles, sprawling Southern California city has the highest number of drop out students, likely as a result of its high population density and numerous school districts. <br><br>Among the data reflected from each individual county, we can see that <em>male students & Hispanic students is often the population group with the highest number of drop out</em>, though these two factors may not necessarily be directly correlated. Further more, the drop out rate tends to have a positive correlation with increase in students' grades.</p>
+                                <p>The California Department of Education released data from 1991 to 2017 on the number of drop out students per county, labeled with their relative gender, ethnicity and grade. <em>Though it is difficult to calculate the percentage of drop-out due to the lack of initial enrollment data</em>, we can see that Los Angeles, sprawling Southern California city has the highest number of drop out students, likely as a result of its high population density and numerous school districts.
+                                    <br>
+                                    <br>Among the data reflected from each individual county, we can see that <em>male students & Hispanic students is often the population group with the highest number of drop out</em>, though these two factors may not necessarily be directly correlated. Further more, the drop out rate tends to have a positive correlation with increase in students' grades.</p>
                             </div>
                             <div id="calimap"></div>
                         </div>
                         <div class="sel-county" id="sel-c">
                             <h1>Los Angeles</h1>
                             <h3>38278 dropout(s)</h3>
-                            <p>Hover above each county to display its total drop-out rate, click to show statistics by gender, ethnicity and grade on the right.</p>
+                            <p>Hover above each county to display its total drop-out rate, click to show statistics by gender, ethnicity and grade on the right.
+                                <br>
+                                <br> * NAI = Native American / Indian, A = Asian, P = Pacific Islander, F = Filipino, H = Hispanic / Latino, AA = African American, W = White, M = Multi-race, N = No Race / No Record</p>
                         </div>
                     </div>
                     <div class="col-2 sub-legend">
                         <div>Dropout Distribution by Ethnicity</div>
                         <div>Dropout Distribution by Gender</div>
                         <div>Dropout Distribution by Grade</div>
-
                     </div>
                     <div class="col-3">
                         <div class="row">
@@ -82,7 +77,6 @@
                                     <div id="bargrade"></div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -90,22 +84,18 @@
             <section id="page3" class="page">
                 <div id="title">
                     <h1>DATA CORRELATION BETWEEN DEMOGRAPHIC FACTORS</h1>
-                    <h5 class="question">What are the undelying causes of dropouts?</h5>
-                </div>
+                    <h5 class="question">What are the undelying causes of dropouts?</h5> </div>
                 <div class="sankeytitle">
                     <div id="filter">
                         <div id="yearfilter">
                             <button id="allyear" class="pill" value="true" onclick="allyear();">All Year (Click to Expand Year Selector)</button>
-                            <input type="range" min="1991" max="2016" value="1997" class="selectorsT slider" id="yearRange">
-                            <span><span id="selectedyear"></span></span>
+                            <input type="range" min="1991" max="2016" value="1997" class="selectorsT slider" id="yearRange"> <span><span id="selectedyear"></span></span>
                         </div>
-
                     </div>
                 </div>
                 <div class="info row">
                     <div class="col-4">
-                        <div id="selectors">
-                            <span id="warning"></span>
+                        <div id="selectors"> <span id="warning"></span>
                             <form class="pill">
                                 <select id="partA" class="selectorsC">
                                     <option value="gender" selected="selected">Gender</option>
@@ -114,20 +104,17 @@
                                     <option value="county">County</option>
                                 </select>
                             </form>
-                            <!-- <span>To</span> -->
-                        </div>
+                            <!-- <span>To</span> --></div>
                         <div class="comparisons">
                             <div class="subgraphs" id="partAGraph"></div>
                             <div class="l-year">year</div>
                         </div>
-
                     </div>
                     <div class="col-4 correlation">
                         <div id="sankey"></div>
                     </div>
                     <div class="col-4">
-                        <div id="selectors">
-                            <span id="warning"></span>
+                        <div id="selectors"> <span id="warning"></span>
                             <form class="pill">
                                 <select id="partB" class="selectorsC">
                                     <option value="gender">Gender</option>
@@ -148,23 +135,38 @@
                     <div class="sub-subinfo" id="event"></div>
                 </div>
             </section>
+            <section id="page4" class="page">
+                <div class="conclusionright">
+                    <div>
+                        <h1>CONCLUSION</h1>
+                        <h5 class="question">What did we learn from this visualization?</h5> </div>
+                    <div class="background">
+                        <p>Though this dataset is imperfect and our exploration can be expanded further, our current result indicates that there are indeed a few patterns, reflecting that there may be underlying social-economic root causes of students dropping out, whether if it is due to difficulties or for alternative success.
+                            <br>
+                            <br>Here are a few news reports from the media that discusses the statuses of student dropout for California specific to the demographic patterns visualized, and it may help you further explore the topic. </p>
+                        <!-- <form method="get" action="./data/dropoutdata_cleaned.csv">
+                        <button class="pill" type="submit">Download Data</button>
+                    </form> -->
+                        <button class="pill" onclick="location.href='https://www.issuelab.org/resources/11619/11619.pdf';">What Factors Predict High School Graduation in the Los Angeles Unified School District</button>
+                        <button class="pill" onclick="location.href='http://ftp.iza.org/dp3265.pdf';">Why Are Hispanic and African-American Dropout Rates So High? </button>
+                        <button class="pill" onclick="location.href='https://publikationer.sida.se/contentassets/4334380a5b754ef9924a6e25a4ca6e8a/babf2dad-1010-4035-8bfd-ce7d7f9108d7.pdf';">Gender perspectives on causes and effects of school dropouts</button>
+                        <button class="pill" onclick="location.href='https://medium.com/world-of-opportunity/why-do-girls-drop-out-of-school-f2762389a07e';">Why do girls drop out of school and what are the consequences of dropping out?</button>
+                        <button class="pill" onclick="location.href='http://www2.edc.org/WomensEquity/pubs/digests/digest-dropouts.html';">Female Dropouts: The Challenge</button>
+                        <button class="pill" onclick="location.href='https://www.kidsdata.org/topic/106/dropouts-race/table#fmt=193&loc=2,127,347,1763,331,348,336,171,321,345,357,332,324,369,358,362,360,337,327,364,356,217,353,328,354,323,352,320,339,334,365,343,330,367,344,355,366,368,265,349,361,4,273,59,370,326,333,322,341,338,350,342,329,325,359,351,363,340,335&tf=130&ch=7,11,726,85,10,72,9,73';">Students Not Completing High School, by Race/Ethnicity</button>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
     <div id="pageToggle">
-        <button id="button1" onClick="toPage(1)" class="pageButton active">
-            <span>Introduction</span></button>
-        <button id="button2" onClick="toPage(2)" class="pageButton">
-            <span>Geo Map</span></button>
-        <button id="button3" onClick="toPage(3)" class="pageButton">
-            <span>Correlation</span></button>
+        <button id="button1" onClick="toPage(1)" class="pageButton active"> <span>Introduction</span></button>
+        <button id="button2" onClick="toPage(2)" class="pageButton"> <span>Geo Map</span></button>
+        <button id="button3" onClick="toPage(3)" class="pageButton"> <span>Correlation</span></button>
+        <button id="button4" onClick="toPage(4)" class="pageButton"> <span>Conclusion</span></button>
     </div>
-
-    
-
     <!--bootstrap-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
     <!--personal js-->
     <script src="./js/sankey-vis.js"></script>
     <script src="./js/subgraph.js"></script>
@@ -173,5 +175,6 @@
     <script src="./js/geo-subgraph.js"></script>
     <script src="./js/sel-county-info.js"></script>
     <script src="./js/main.js"></script>
+</body>
 
-</body></html>
+</html>

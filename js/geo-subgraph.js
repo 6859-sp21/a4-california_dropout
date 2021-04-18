@@ -74,11 +74,11 @@ function geo_subgraph(type, county, load) {
         if(type == "ethnic"){
             colorScheme = d3.scaleOrdinal()
             .domain(["NativeAmericanorIndian", "Asian", "Pacific", "Filipino", "Hispanic", "AfricanAmerican", "White", "MultipleRace", "NoRace"])
-            .range(["orange", "yellow", "blue", "purple", "green", "brown", "white", "pink", "red"])
+            .range(["#EF6633", "#DEBA77", "#7799BB", "#5B72B3", "#74AA5E", "#542231", "#F6D6D6", "#2b2b2b", "#bcbcbc"])
         } else if(type=="gender"){
             colorScheme = d3.scaleOrdinal()
             .domain(["Female", "Male"])
-            .range(["orange", "blue"]);
+            .range(["#F7A952", "#A8DBED"]);
         } else {
             colorScheme = d3.scaleOrdinal()
             .domain(["Grade7", "Grade8", "Grade9", "Grade10", "Grade11", "Grade12"])
