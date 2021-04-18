@@ -1,7 +1,7 @@
 var subwidth = document.getElementById("partAGraph").offsetWidth,
     subheight = document.getElementById("partAGraph").offsetHeight, // set svg width and height
     submargin = 40,
-    submax = 60, // hard coded maximum number of paths (60 counties)
+    submax = 80, // hard coded maximum number of paths (60 counties)
     subyearScale = d3.scaleLinear()
     .domain([1991, 2016])
     .range([0, subwidth - submargin * 1.5]),
@@ -154,7 +154,7 @@ function subgraph(N, C, load) {
                 d3.select(".graph" + N + "path" + i)
                     .datum(tempdata)
                     .transition()
-                    .duration(800)
+//                    .duration(800)
                     .attr("class", "graph" + N + "path" + i + " activepath path" + tempname.replace(/\s/g, ''))
                     .attr("stroke", tempcolor)
                     .attr("d", d3.line()
@@ -172,21 +172,21 @@ function subgraph(N, C, load) {
                         d3.select(this).transition()
                             .style("stroke-width", "5px")
                         d3.selectAll(".link" + d[0].name.replace(/\s/g, ''))
-                            .transition()
+//                            .transition()
                             .style("stroke-opacity", 1)
                     })
                     .on("mouseout", function (event, d) {
                         d3.select(this).transition()
                             .style("stroke-width", "1px")
                         d3.selectAll(".link" + d[0].name.replace(/\s/g, ''))
-                            .transition()
+//                            .transition()
                             .style("stroke-opacity", 0.3)
                     })
 
             } else {
 
                 d3.select(".graph" + N + "path" + i)
-                    .transition()
+//                    .transition()
                     .attr("class", "graph" + N + "path" + i)
                     .attr("stroke", "none")
                     .attr("d", d3.line()(initialpath))
