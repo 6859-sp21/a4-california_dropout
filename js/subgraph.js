@@ -12,7 +12,7 @@ for (i = 1991; i < 2017; i++) { // only for transition purpose
 }
 
 // preprocessed columns for faster data loading
-const columes = {
+let columes = {
     gender: ["Female", "Male"],
     ethnic: ["NativeAmericanorIndian", "Asian", "Pacific", "Filipino", "Hispanic", "AfricanAmerican", "White", "MultipleRace", "NoRace"],
     grade: ["Grade7", "Grade8", "Grade9", "Grade10", "Grade11", "Grade12"],
