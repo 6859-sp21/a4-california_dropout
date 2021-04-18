@@ -15,7 +15,7 @@ We download the data from the website of the California Department of Education 
 
 ## Layout Design
 
-In our webpage, we introduce our topic along with the research question to inform the audience of our motivation. We layout the geospatial map and the line charts first, followed by the Sankey diagram and the event list to allow our audience to interact with the data and understand what is happening beneath the numbers. 
+In our webpage, we introduce our topic along with the research question to inform the audience of our motivation. There are mainly four slides in our visualization, including introduction, geographic distribution, demographic correlation and conclusion. Firstly, basic background information is introduced at the beginning slide. Secondly, the geospatial map is presented to demonstrate the distrubution among counties, followed by the line charts for further details in specific counties. Thirdly, the Sankey diagram and the event list are visualized to allow our audience to interact with the data and understand what is happening beneath the numbers. Last but not least, a brief conclusion is made to sum up our discovery among data.
 
 
 ## Design Process 
@@ -35,6 +35,7 @@ With regard to interactive design, these are the main highlights of our visualiz
     - By clicking on a county, we update the three bar charts on the top right side to show the demographic information of the dropouts for that county. This function aims to help users explore the data county by county. 
     - Click “Download” button: users can click a download button to get our data. 
 4. Dropdown menu: there are two dropdown menus, which allow users to pick two factors out of gender, ethnicity, academic_year (grade), and county. After two factors are chosen, the Sankey diagram will update accordingly to show the flow of numbers. This is a great tool for users to investigate how each of these factors contributes to the overall dropout number. Alternatively, we thought about using a pie chart to see the composition of groups, but the pie chart is unable to visualize how two factors interact.
+5. Hover on Sankey features: users can hover on specific link on the sankey diagram and the line graphs on the two sides will emphasized the selected features for more clear comparison.
 
 ## Development process. 
 Overall, there are two parts that take the most time: creating each visualization component and the overall layout design. Each visualization component needs to work well with our data and has many details to consider. Iteration on each component takes the most time. Another part that takes much time is to organize our visualization in a neat manner. It took a while to get margin conventions and position transformations right. 
