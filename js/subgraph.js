@@ -109,7 +109,7 @@ function subgraph(N, C, load) {
                     .append("path")
                     .attr("class", "graph" + N + "path" + i)
                     .attr("fill", "none")
-                    .attr("stroke", "none")
+//                    .attr("stroke", "none")
                     .attr("stroke-width", 1)
                     .attr("d", d3.line()(initialpath))
             };
